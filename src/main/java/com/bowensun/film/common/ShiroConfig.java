@@ -60,7 +60,7 @@ public class ShiroConfig {
         filterChainDefinitionMap.put("/login2", "anon");
         filterChainDefinitionMap.put("/userInfo/login", "anon");
         filterChainDefinitionMap.put("/userInfo/userInfoList", "anon");
-        //        其余所有的权限都要设置访问
+        //其余所有的权限都要设置访问
         //filterChainDefinitionMap.put("/**", "authc");
         //认证或者rememberMe
         //filterChainDefinitionMap.put("/**", "user");
@@ -156,5 +156,7 @@ public class ShiroConfig {
         cookieRememberMeManager.setCipherKey(Base64.decode("4AvVhmFLUs0KTA3Kprsdag=="));
         return cookieRememberMeManager;
     }
+
+
 
 }

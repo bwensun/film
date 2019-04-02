@@ -1,11 +1,13 @@
 spring:
+  #引入外部文件
+  profiles:
+    include: druid
   # 数据库配置
-  datasource:
     # type: com.alibaba.druid.pool.DruidDataSource
-    driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://127.0.0.1:3306/film?useUnicode=true&characterEncoding=utf-8&autoReconnect=true&autoReconnectForPools=true&failOverReadOnly=false&useSSL=true
-    username: root
-    password: 285413
+#    driver-class-name: com.mysql.jdbc.Driver
+#    url: jdbc:mysql://127.0.0.1:3306/film?useUnicode=true&characterEncoding=utf-8&autoReconnect=true&autoReconnectForPools=true&failOverReadOnly=false&useSSL=true
+#    username: root
+#    password: 285413
   jpa:
     show-sql: true
     hibernate:
