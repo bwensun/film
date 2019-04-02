@@ -32,7 +32,7 @@ public class LogAop {
     }
 
     @Around("log()")
-    public void aroundExecute(ProceedingJoinPoint point) throws Throwable {
+    public Object aroundExecute(ProceedingJoinPoint point) throws Throwable {
         long start = System.currentTimeMillis();
 
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
@@ -46,5 +46,6 @@ public class LogAop {
         long costTime = end - start;
         logger.info("方法名:"+ methodName + "  请求用时："+ costTime + "ms  参数:" + JSON.toJSON(args) + "  响应结果: " + JSON.toJSON(result));
         logger.info("===========>结束调用:"+ methodName +"<================");
+        return result;
     }
 }

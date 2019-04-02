@@ -12,6 +12,9 @@ spring:
     show-sql: true
     hibernate:
       ddl-auto: update
+  output:
+    ansi:
+      enabled: detect
 
   #模板引擎
   thymeleaf:

@@ -27,8 +27,10 @@ import org.mybatis.dynamic.sql.select.render.SelectStatementProvider;
 import org.mybatis.dynamic.sql.update.UpdateDSL;
 import org.mybatis.dynamic.sql.update.render.UpdateStatementProvider;
 import org.mybatis.dynamic.sql.util.SqlProviderAdapter;
+import org.springframework.stereotype.Repository;
 
 @Mapper
+@Repository
 public interface USERMapper {
     @Generated("org.mybatis.generator.api.MyBatisGenerator")
     @DeleteProvider(type=SqlProviderAdapter.class, method="delete")

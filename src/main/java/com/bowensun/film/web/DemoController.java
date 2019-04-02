@@ -28,7 +28,6 @@ import java.util.concurrent.Executors;
 public class DemoController {
 
     @Autowired
-
     private USERMapper userMapper;
 
     @PostMapping(value = "query")
@@ -47,7 +46,7 @@ public class DemoController {
 
     }
 
-    public void main(String[] args) {
+/*    public void main(String[] args) {
         //ExecutorService pool = Executors.newCachedThreadPool();
         for (int i = 0; i < 10; i++) {
             new Runnable() {
@@ -57,5 +56,5 @@ public class DemoController {
                 }
             }.run();
         }
-    }
+    }*/
 }
