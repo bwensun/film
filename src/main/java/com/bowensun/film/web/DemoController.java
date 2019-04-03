@@ -8,13 +8,13 @@ import static org.mybatis.dynamic.sql.SqlBuilder.*;
 import com.bowensun.film.web.aop.log.LogT;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+
 
 /**
  * @author 郑建雄
@@ -30,7 +30,7 @@ public class DemoController {
     @Autowired
     private USERMapper userMapper;
 
-    @PostMapping(value = "query")
+    @GetMapping(value = "query")
     @LogT
     public List<USER> userDemo(){
 
