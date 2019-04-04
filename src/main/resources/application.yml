@@ -44,6 +44,8 @@ spring:
 mybatis:
   type-aliases-package: com.bowensun.film.domain
   mapper-locations: classpath:mapper/*.xml
+server:
+  port: 8080
 
 
 

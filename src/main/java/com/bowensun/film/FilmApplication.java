@@ -27,25 +27,4 @@ public class FilmApplication extends SpringBootServletInitializer {
         return builder.sources(this.getClass());
     }
 
-
-/*
-    @Bean
-    public CorsFilter corsFilter(){
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", buildConfig());
-        return new CorsFilter(source);
-    }
-
-    *//**
-     *
-     * @return
-     *//*
-    private CorsConfiguration buildConfig() {
-        CorsConfiguration corsConfiguration = new CorsConfiguration();
-        corsConfiguration.addAllowedOrigin("*");
-        corsConfiguration.addAllowedHeader("*");
-        corsConfiguration.addAllowedMethod("*");
-        //corsConfiguration.addExposedHeader(httphead);
-        return corsConfiguration;
-    }*/
 }

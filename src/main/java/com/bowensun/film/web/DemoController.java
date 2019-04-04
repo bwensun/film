@@ -8,11 +8,9 @@ import static org.mybatis.dynamic.sql.SqlBuilder.*;
 import com.bowensun.film.web.aop.log.LogT;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 
@@ -38,6 +36,9 @@ public class DemoController {
                 .build()
                 .execute();
         //users.stream().forEach(x -> System.out.println(x.toString()));
+        //response.addHeader("Access-Control-Allow-Origin", "http://127.0.0.1:8080");
+        //response.addHeader("Access-Control-Allow-Methods", "GET");
+        //response.addHeader("Access-Control-Allow-Headers", "*");
         return users;
     }
 
@@ -46,15 +47,4 @@ public class DemoController {
 
     }
 
-/*    public void main(String[] args) {
-        //ExecutorService pool = Executors.newCachedThreadPool();
-        for (int i = 0; i < 10; i++) {
-            new Runnable() {
-                @Override
-                public void run() {
-                    test1();
-                }
-            }.run();
-        }
-    }*/
 }
