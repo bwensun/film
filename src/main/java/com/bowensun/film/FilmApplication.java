@@ -20,7 +20,12 @@ public class FilmApplication extends SpringBootServletInitializer {
         SpringApplication.run(FilmApplication.class, args);
     }
 
-    //为了打包项目
+    /**
+     *
+     *
+     * @param builder
+     * @return
+     */
     @Override
     protected SpringApplicationBuilder configure(
             SpringApplicationBuilder builder) {

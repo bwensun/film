@@ -10,6 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
@@ -30,6 +31,7 @@ public class DemoController {
 
     @GetMapping(value = "query")
     @LogT
+
     public List<USER> userDemo(){
 
         List<USER> users = userMapper.selectByExample().where(USERDynamicSqlSupport.name, isEqualTo("zjx"), or(USERDynamicSqlSupport.username, isEqualTo("千仞雪")))
