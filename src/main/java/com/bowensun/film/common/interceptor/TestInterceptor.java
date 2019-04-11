@@ -27,7 +27,7 @@ public class TestInterceptor implements HandlerInterceptor {
      */
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object Handler) throws Exception {
-        logger.info("=========处理器执行之前调用==========");
+        //logger.info("=========处理器执行之前调用==========");
         return true;
     }
 
@@ -40,11 +40,11 @@ public class TestInterceptor implements HandlerInterceptor {
      */
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
-        logger.info("=========处理器执行之后调用,跳转到指定视图之前调用==========");
+        //logger.info("=========处理器执行之后调用,跳转到指定视图之前调用==========");
     }
 
     @Override
-    public void afterCompletion(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o, Exception e) throws Exception {
-        logger.info("=========请求处理完成之后调用===========");
+    public void afterCompletion(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object handler, Exception e) throws Exception {
+        //logger.info("=========请求处理完成之后调用===========");
     }
 }

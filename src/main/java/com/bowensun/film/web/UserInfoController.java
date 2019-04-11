@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import springfox.documentation.annotations.ApiIgnore;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,6 +30,7 @@ import java.util.List;
 @RestController
 @Slf4j
 @RequestMapping("userInfo")
+@ApiIgnore
 public class UserInfoController extends BaseController {
 
     @Autowired
@@ -63,7 +65,7 @@ public class UserInfoController extends BaseController {
     }
 
     @RequiresPermissions("admin:delete")
-    @RequestMapping("/delete")
+    @DeleteMapping("/delete")
     public String userDelete(Model model) {
         model.addAttribute("value", "删除用户");
         return "user";
@@ -77,7 +79,7 @@ public class UserInfoController extends BaseController {
     }
 
 
-    @RequestMapping("/account")
+    @GetMapping("/account")
     public String index(Model m) {
         List<Account> list = new ArrayList<Account>();
         list.add(new Account("KangKang", "康康", "e10adc3949ba59abbe56e", "超级管理员", "17777777777"));
@@ -88,6 +90,7 @@ public class UserInfoController extends BaseController {
         return "account";
     }
 
+    @ApiIgnore
     @RequestMapping("test")
     public Result test1(){
         return new Success("success");

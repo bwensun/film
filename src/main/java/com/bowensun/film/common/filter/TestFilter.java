@@ -23,17 +23,17 @@ public class TestFilter implements Filter {
 
     @Override
     public void init(javax.servlet.FilterConfig filterConfig) throws ServletException {
-        logger.info("==========初始化过滤器=============");
+        //logger.info("==========初始化过滤器=============");
     }
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
-        logger.info("==========开始过滤=============");
+        //logger.info("==========开始过滤=============");
         filterChain.doFilter(servletRequest, servletResponse);
     }
 
     @Override
     public void destroy() {
-        logger.info("==========初始化过滤器=============");
+        //logger.info("==========销毁过滤器=============");
     }
 }

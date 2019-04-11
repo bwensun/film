@@ -6,12 +6,11 @@ import com.bowensun.film.repository.USERMapper;
 import static org.mybatis.dynamic.sql.SqlBuilder.*;
 
 import com.bowensun.film.web.aop.log.LogT;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-import javax.servlet.annotation.WebFilter;
-import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 
@@ -24,6 +23,7 @@ import java.util.List;
 @RestController
 @RequestMapping(value = "demo")
 @Slf4j
+@Api(value = "测试功能相关接口<DemoController>", tags = "DemoController", description = "测试功能相关接口")
 public class DemoController {
 
     @Autowired
@@ -31,7 +31,7 @@ public class DemoController {
 
     @GetMapping(value = "query")
     @LogT
-
+    @ApiOperation(value = "根据用户名查询数据", notes = "测试DynamicSQL功能")
     public List<USER> userDemo(){
 
         List<USER> users = userMapper.selectByExample().where(USERDynamicSqlSupport.name, isEqualTo("zjx"), or(USERDynamicSqlSupport.username, isEqualTo("千仞雪")))
