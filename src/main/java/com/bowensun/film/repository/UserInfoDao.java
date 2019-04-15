@@ -18,7 +18,6 @@ import java.util.List;
 @Repository
 public interface UserInfoDao {
     //根据用户名查询
-    @Cacheable(keyGenerator = "customerKeyGenerator")
     UserInfo selectByUserName(@Param("userName") String userName);
 
     //新增用户

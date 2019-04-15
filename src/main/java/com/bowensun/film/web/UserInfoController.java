@@ -13,7 +13,6 @@ import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import springfox.documentation.annotations.ApiIgnore;
@@ -30,13 +29,13 @@ import java.util.List;
 @RestController
 @Slf4j
 @RequestMapping("userInfo")
-@ApiIgnore
 public class UserInfoController extends BaseController {
 
     @Autowired
     private UserInfoService userInfoService;
 
     //登录
+    @ApiIgnore
     @PostMapping("/login")
     public Result login(String username, String password, boolean rememberMe){
         log.info("-------进入登录方法-------");
@@ -55,6 +54,7 @@ public class UserInfoController extends BaseController {
     }
 
     //注册用户
+    @ApiIgnore
     @RequestMapping(value = "/add")
     @RequiresPermissions("admin:add")
     public String register(Model model){
@@ -66,6 +66,7 @@ public class UserInfoController extends BaseController {
 
     @RequiresPermissions("admin:delete")
     @DeleteMapping("/delete")
+    @ApiIgnore
     public String userDelete(Model model) {
         model.addAttribute("value", "删除用户");
         return "user";
@@ -80,6 +81,7 @@ public class UserInfoController extends BaseController {
 
 
     @GetMapping("/account")
+    @ApiIgnore
     public String index(Model m) {
         List<Account> list = new ArrayList<Account>();
         list.add(new Account("KangKang", "康康", "e10adc3949ba59abbe56e", "超级管理员", "17777777777"));
@@ -89,14 +91,15 @@ public class UserInfoController extends BaseController {
         m.addAttribute("accountList",list);
         return "account";
     }
-
-    @ApiIgnore
+    
     @RequestMapping("test")
+    @ApiIgnore
     public Result test1(){
         return new Success("success");
     }
 
     @RequestMapping("test2")
+    @ApiIgnore
     public Result test2(String name){
         System.out.println(name);
         return new Success(name);

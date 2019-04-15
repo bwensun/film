@@ -1,6 +1,8 @@
 package com.bowensun.film.service;
 
 import com.bowensun.film.domain.UserInfo;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.Cacheable;
 
 import java.util.List;
 
@@ -12,8 +14,8 @@ import java.util.List;
  */
 public interface UserInfoService {
 
-    void userAdd(UserInfo user);
 
+    void userAdd(UserInfo user);
 
     List<UserInfo> selectUserInfoList();
 }

@@ -1,10 +1,7 @@
 package com.bowensun.film.domain;
 
-import lombok.ToString;
-
 import javax.annotation.Generated;
 
-@ToString
 public class USER {
     @Generated("org.mybatis.generator.api.MyBatisGenerator")
     private Integer uid;

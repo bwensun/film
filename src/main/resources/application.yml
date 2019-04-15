@@ -28,7 +28,7 @@ spring:
     static-locations: classpath:templates,classpath:/META-INF/resources/,classpath:/resources/,classpath:/static/,classpath:/public/
   redis:
     database: 0
-#    password: 285413
+  #  password: 285413
     host: 127.0.0.1
     port: 6379
     pool:
@@ -37,7 +37,6 @@ spring:
       max-idle: 4000
       min-idle: 0
     timeout: 5000
-
 
 #mybatis配置
   #配置实体类映射和mappeclasspath:r.xml文件路径

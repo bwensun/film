@@ -1,6 +1,6 @@
 package com.bowensun.film.repository;
 
-import static com.bowensun.film.repository.USERDynamicSqlSupport.*;
+import static com.bowensun.film.domain.USERDynamicSqlSupport.*;
 import static org.mybatis.dynamic.sql.SqlBuilder.*;
 
 import com.bowensun.film.domain.USER;

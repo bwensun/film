@@ -31,7 +31,8 @@ public class RedisConfig extends CachingConfigurerSupport {
     @Bean
     public RedisTemplate<String, String> redisTemplate(RedisConnectionFactory factory) {
         StringRedisTemplate template = new StringRedisTemplate(factory);
-        setSerializer(template);// 设置序列化工具
+        // 设置序列化工具
+        setSerializer(template);
         template.afterPropertiesSet();
         return template;
     }
@@ -56,6 +57,7 @@ public class RedisConfig extends CachingConfigurerSupport {
     }
 
     @Bean(value = "customerKeyGenerator")
+    @Override
     public KeyGenerator keyGenerator(){
         return new KeyGenerator() {
             @Override
