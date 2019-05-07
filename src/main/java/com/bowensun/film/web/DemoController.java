@@ -7,6 +7,7 @@ import static org.mybatis.dynamic.sql.SqlBuilder.*;
 
 import com.bowensun.film.repository.USERMapper;
 import com.bowensun.film.web.aop.log.LogT;
+import com.github.pagehelper.PageHelper;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
@@ -34,14 +35,15 @@ public class DemoController {
     @LogT
     @ApiOperation(value = "根据用户名查询数据", notes = "测试DynamicSQL功能")
     public List<USER> userDemo(){
-        List<USER> users = userMapper.selectByExample().where(USERDynamicSqlSupport.name, isEqualTo("zjx"), or(USERDynamicSqlSupport.username, isEqualTo("千仞雪")))
+        PageHelper.startPage(1, 10);
+        List<USER> users = userMapper.selectByExample() //.where(USERDynamicSqlSupport.name, isEqualTo("zjx"), or(USERDynamicSqlSupport.username, isEqualTo("千仞雪")))
                 .build()
                 .execute();
         return users;
     }
 
     @LogT
-    public static void test1(){
+    public void test1(){
 
     }
 

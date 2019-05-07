@@ -38,7 +38,7 @@ public class Swagger2Config {
               .description("功能测试")
               //即为contact中的url
               //.termsOfServiceUrl("http://localhost:8080/api")
-              .contact(new Contact("孙博文", "bwensun.top", "bwensun@foxmail.com"))
+              .contact(new Contact("孙博文", "bowensun.top", "bwensun@foxmail.com"))
               .version("1.0")
               .build();
     }
