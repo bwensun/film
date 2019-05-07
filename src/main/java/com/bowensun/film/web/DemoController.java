@@ -5,13 +5,19 @@ import com.bowensun.film.domain.USERDynamicSqlSupport;
 
 import static org.mybatis.dynamic.sql.SqlBuilder.*;
 
+import com.bowensun.film.domain.UserInfo;
 import com.bowensun.film.repository.USERMapper;
+import com.bowensun.film.repository.UserInfoDao;
+import com.bowensun.film.repository.UserRepository;
 import com.bowensun.film.web.aop.log.LogT;
+import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
@@ -30,6 +36,10 @@ public class DemoController {
 
     @Autowired
     private USERMapper userMapper;
+    @Autowired
+    private UserInfoDao userInfoDao;
+    @Autowired
+    private UserRepository userRepository;
 
     @GetMapping(value = "query")
     @LogT
@@ -43,8 +53,20 @@ public class DemoController {
     }
 
     @LogT
-    public void test1(){
-
+    @GetMapping(value = "/test1")
+    public List<UserInfo> test1(){
+        PageHelper.startPage(1, 10);
+        List<UserInfo> userInfos = userInfoDao.selectUserInfoList();
+        return userInfos;
     }
 
+
+    @GetMapping(value = "/jpa")
+    public List<UserInfo> test2(){
+        PageHelper.startPage(1, 10);
+        //List<UserInfo> userInfos = userInfoDao.findAll();
+        Sort sort = new Sort(Sort.Direction.DESC, "state");
+        List<UserInfo> userInfos = userRepository.findAll(sort);
+        return userInfos;
+    }
 }

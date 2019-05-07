@@ -75,4 +75,5 @@ public class RedisConfig extends CachingConfigurerSupport {
     public ValueOperations<String, String> opsForValue(RedisTemplate<String, String> redisTemplate){
         return redisTemplate.opsForValue();
     }
+
 }

@@ -33,11 +33,11 @@ public class UserInfo implements Serializable {
     @Column(unique = true)
     private byte state;
 
-    @ManyToMany(fetch = FetchType.EAGER)//立即从数据库中进行加载数据;
+/*    @ManyToMany(fetch = FetchType.EAGER)//立即从数据库中进行加载数据;
     @JoinTable(name = "SysUserRole",
             joinColumns = {@JoinColumn(name = "uid")},
             inverseJoinColumns = {@JoinColumn(name = "roleId")})
-    private List<SysRole> roleList;// 一个用户具有多个角色
+    private List<SysRole> roleList;// 一个用户具有多个角色*/
 
     public Integer getUid() {
         return uid;
@@ -87,11 +87,5 @@ public class UserInfo implements Serializable {
         this.state = state;
     }
 
-    public List<SysRole> getRoleList() {
-        return roleList;
-    }
 
-    public void setRoleList(List<SysRole> roleList) {
-        this.roleList = roleList;
-    }
 }
