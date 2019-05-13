@@ -1,4 +1,4 @@
-package com.bowensun.film.common;
+package com.bowensun.film.common.shiro;
 
 
 import org.apache.shiro.session.Session;

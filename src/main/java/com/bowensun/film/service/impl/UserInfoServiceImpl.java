@@ -19,13 +19,10 @@ import java.util.List;
  * @date 2018/11/9
  */
 @Service
-@CacheConfig(cacheNames = "user")
 public class UserInfoServiceImpl implements UserInfoService {
 
     @Autowired
     private UserInfoDao userInfoDao;
-    @Autowired
-    private ValueOperations valueOperations;
 
     @Override
     public void userAdd(UserInfo user) {
@@ -33,7 +30,6 @@ public class UserInfoServiceImpl implements UserInfoService {
     }
 
     @Override
-    @Cacheable
     public List<UserInfo> selectUserInfoList() {
         //ObjectMapper objectMapper = new ObjectMapper();
         //valueOperations.set("userInfoList", userInfos);

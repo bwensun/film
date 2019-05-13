@@ -1,4 +1,4 @@
-package com.bowensun.film.common.config;
+package com.bowensun.film.common.config.redis;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
@@ -14,6 +14,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
+import org.springframework.data.redis.serializer.StringRedisSerializer;
 import org.springframework.util.StringUtils;
 
 import java.lang.reflect.Method;
@@ -29,8 +30,9 @@ import java.lang.reflect.Method;
 public class RedisConfig extends CachingConfigurerSupport {
 
     @Bean
-    public RedisTemplate<String, String> redisTemplate(RedisConnectionFactory factory) {
-        StringRedisTemplate template = new StringRedisTemplate(factory);
+    public RedisTemplate<String, Object> redisTemplate(RedisConnectionFactory factory) {
+        RedisTemplate<String, Object> template = new RedisTemplate();
+        template.setConnectionFactory(factory);
         // 设置序列化工具
         setSerializer(template);
         template.afterPropertiesSet();
@@ -43,8 +45,12 @@ public class RedisConfig extends CachingConfigurerSupport {
         om.setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.ANY);
         om.enableDefaultTyping(ObjectMapper.DefaultTyping.NON_FINAL);
         jackson2JsonRedisSerializer.setObjectMapper(om);
-        template.setKeySerializer(jackson2JsonRedisSerializer);
+        //TODO 因为key均为string类型，所以使用StringRedisSerializer
+        template.setKeySerializer(new StringRedisSerializer());
+        template.setHashKeySerializer(new StringRedisSerializer());
+        //TODO 为value值设置jackson序列化
         template.setValueSerializer(jackson2JsonRedisSerializer);
+        template.setHashValueSerializer(jackson2JsonRedisSerializer);
     }
 
     // 缓存管理器
@@ -72,7 +78,7 @@ public class RedisConfig extends CachingConfigurerSupport {
     }
 
     @Bean
-    public ValueOperations<String, String> opsForValue(RedisTemplate<String, String> redisTemplate){
+    public ValueOperations<String, Object> opsForValue(RedisTemplate<String, Object> redisTemplate){
         return redisTemplate.opsForValue();
     }
 

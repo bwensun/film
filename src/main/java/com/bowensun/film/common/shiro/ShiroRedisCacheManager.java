@@ -1,4 +1,4 @@
-package com.bowensun.film.common;
+package com.bowensun.film.common.shiro;
 
 import org.apache.shiro.cache.Cache;
 import org.apache.shiro.cache.CacheException;

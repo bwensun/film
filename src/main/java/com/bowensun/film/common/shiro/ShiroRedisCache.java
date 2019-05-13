@@ -1,4 +1,4 @@
-package com.bowensun.film.common;
+package com.bowensun.film.common.shiro;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.cache.Cache;

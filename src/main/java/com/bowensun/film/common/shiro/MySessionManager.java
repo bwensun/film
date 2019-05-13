@@ -1,4 +1,4 @@
-package com.bowensun.film.common;
+package com.bowensun.film.common.shiro;
 
 import org.apache.shiro.web.servlet.ShiroHttpServletRequest;
 import org.apache.shiro.web.session.mgt.DefaultWebSessionManager;

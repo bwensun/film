@@ -10,5 +10,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * @date 2019/5/7
  */
 public interface UserRepository extends JpaRepository<UserInfo, Integer> {
-
+    //UserInfo findByUsernameAndUid(String username, String uid);
 }

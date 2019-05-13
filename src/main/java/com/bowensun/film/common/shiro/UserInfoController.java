@@ -1,4 +1,4 @@
-package com.bowensun.film.web;
+package com.bowensun.film.common.shiro;
 
 import com.alibaba.fastjson.JSONObject;
 import com.bowensun.film.domain.Account;
