@@ -159,11 +159,11 @@
             <version>1.5.13.RELEASE</version>
         </dependency>
         <!--shiro-->
-        <dependency>
+<!--        <dependency>
             <groupId>org.apache.shiro</groupId>
             <artifactId>shiro-spring-boot-starter</artifactId>
             <version>1.4.0</version>
-        </dependency>
+        </dependency>-->
         <!-- shiro-redis -->
         <!--        <dependency>
                     <groupId>org.crazycake</groupId>

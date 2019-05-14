@@ -1,10 +1,9 @@
-package com.bowensun.film.repository;
+package com.bowensun.film.repository.mybatis;
 
-import com.bowensun.film.domain.SysRole;
+import com.bowensun.film.domain.SysPermission;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
-
 
 import java.util.List;
 
@@ -16,6 +15,6 @@ import java.util.List;
  */
 @Repository
 @Mapper
-public interface RoleDao {
-    List<SysRole> selectByUserName(@Param("username") String username);
+public interface PermissionDao {
+    List<SysPermission> selectByUserName(@Param("username") String username);
 }

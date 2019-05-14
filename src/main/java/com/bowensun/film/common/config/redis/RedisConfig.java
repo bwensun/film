@@ -71,7 +71,7 @@ public class RedisConfig extends CachingConfigurerSupport {
                 StringBuilder key = new StringBuilder();
                 key.append(target.getClass().getSimpleName());
                 key.append(":").append(method.getName());
-                key.append(StringUtils.arrayToDelimitedString(params, "_"));
+                key.append(":").append(StringUtils.arrayToDelimitedString(params, "_"));
                 return key.toString();
             }
         };

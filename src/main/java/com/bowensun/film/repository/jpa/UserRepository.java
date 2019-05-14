@@ -1,4 +1,4 @@
-package com.bowensun.film.repository;
+package com.bowensun.film.repository.jpa;
 
 import com.bowensun.film.domain.UserInfo;
 import org.springframework.data.jpa.repository.JpaRepository;
