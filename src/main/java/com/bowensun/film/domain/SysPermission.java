@@ -17,7 +17,7 @@ public class SysPermission {
 
     private String name;//名称.
 
-    @Column(columnDefinition="enum('menu','button')")
+    @Column(columnDefinition = "enum('menu','button')")
     private String resourceType;//资源类型，[menu|button]
 
     //资源路径.
@@ -35,7 +35,7 @@ public class SysPermission {
     private Boolean available = Boolean.FALSE;
 
     @ManyToMany
-    @JoinTable(name="SysRolePermission",joinColumns={@JoinColumn(name="permissionId")},inverseJoinColumns={@JoinColumn(name="roleId")})
+    @JoinTable(name = "SysRolePermission", joinColumns = {@JoinColumn(name = "permissionId")}, inverseJoinColumns = {@JoinColumn(name = "roleId")})
     private List<SysRole> roles;
 
     public Integer getId() {

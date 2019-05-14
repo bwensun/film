@@ -37,7 +37,7 @@ public class UserInfoController extends BaseController {
     //登录
     @ApiIgnore
     @PostMapping("/login")
-    public Result login(String username, String password, boolean rememberMe){
+    public Result login(String username, String password, boolean rememberMe) {
         log.info("-------进入登录方法-------");
         UsernamePasswordToken token = new UsernamePasswordToken(username, password, rememberMe);
         Subject currentUser = SecurityUtils.getSubject();
@@ -46,7 +46,7 @@ public class UserInfoController extends BaseController {
         try {
             currentUser.login(token);
             jsonObject.put("token", currentUser.getSession().getId());
-        }catch (IncorrectCredentialsException e){
+        } catch (IncorrectCredentialsException e) {
             throw new ServiceException(ErrorCode.PASSWORD_NOT_CORRECT);
         }
         UserInfo userInfo = (UserInfo) currentUser.getPrincipal();
@@ -57,7 +57,7 @@ public class UserInfoController extends BaseController {
     @ApiIgnore
     @RequestMapping(value = "/add")
     @RequiresPermissions("admin:add")
-    public String register(Model model){
+    public String register(Model model) {
         log.info("------进入注册方法----");
         model.addAttribute("value", "新增用户");
         //userInfoService.userAdd(model);
@@ -73,7 +73,7 @@ public class UserInfoController extends BaseController {
     }
 
     @GetMapping("/userInfoList")
-    public Result getUserInfoList(){
+    public Result getUserInfoList() {
         log.info("------开始查询用户列表----");
         List<UserInfo> userInfos = userInfoService.selectUserInfoList();
         return new Success(userInfos);
@@ -86,21 +86,21 @@ public class UserInfoController extends BaseController {
         List<Account> list = new ArrayList<Account>();
         list.add(new Account("KangKang", "康康", "e10adc3949ba59abbe56e", "超级管理员", "17777777777"));
         list.add(new Account("Mike", "麦克", "e10adc3949ba59abbe56e", "管理员", "13444444444"));
-        list.add(new Account("Jane","简","e10adc3949ba59abbe56e","运维人员","18666666666"));
+        list.add(new Account("Jane", "简", "e10adc3949ba59abbe56e", "运维人员", "18666666666"));
         list.add(new Account("Maria", "玛利亚", "e10adc3949ba59abbe56e", "清算人员", "19999999999"));
-        m.addAttribute("accountList",list);
+        m.addAttribute("accountList", list);
         return "account";
     }
-    
+
     @RequestMapping("test")
     @ApiIgnore
-    public Result test1(){
+    public Result test1() {
         return new Success("success");
     }
 
     @RequestMapping("test2")
     @ApiIgnore
-    public Result test2(String name){
+    public Result test2(String name) {
         System.out.println(name);
         return new Success(name);
     }

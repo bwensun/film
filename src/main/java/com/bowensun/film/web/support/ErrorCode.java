@@ -6,11 +6,10 @@ package com.bowensun.film.web.support;
  * @author bowensun
  */
 public enum ErrorCode {
-    INTERNAL_ERROR(500,"代码有问题"),
-    USER_NOT_EXISTS(001,"用户不存在"),
+    INTERNAL_ERROR(500, "代码有问题"),
+    USER_NOT_EXISTS(001, "用户不存在"),
     FILE_NOT_EXISTS(002, "文件不存在"),
-    PASSWORD_NOT_CORRECT(003, "密码错误"),
-    ;
+    PASSWORD_NOT_CORRECT(003, "密码错误"),;
     public int code;
     public String message;
 

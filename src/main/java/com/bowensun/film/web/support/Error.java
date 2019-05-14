@@ -5,7 +5,7 @@ package com.bowensun.film.web.support;
  *
  * @author bowensun
  */
-public class Error implements Result{
+public class Error implements Result {
 
     public int code;
 
@@ -16,7 +16,7 @@ public class Error implements Result{
         this.message = errorCode.message;
     }
 
-    public Error(ErrorCode errorCode,String message){
+    public Error(ErrorCode errorCode, String message) {
         this.code = errorCode.code;
         this.message = message;
     }

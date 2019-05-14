@@ -20,6 +20,7 @@ public class TestInterceptor implements HandlerInterceptor {
 
     /**
      * 处理器执行之前调用
+     *
      * @param request  HttpServletRequest对象，可以获取请求参数等等
      * @param response HttpServletResponse对象
      * @param Handler  拦截器的Controller对象
@@ -33,10 +34,11 @@ public class TestInterceptor implements HandlerInterceptor {
 
     /**
      * 处理器执行之后调用,跳转到指定视图之前调用
-     * @param request  HttpServletRequest对象
-     * @param response HttpServletResponse对象
-     * @param handler  拦截器的Controller对象
-     * @param modelAndView  ModelAndView对象，其中存放的是处理结果和视图的信息
+     *
+     * @param request      HttpServletRequest对象
+     * @param response     HttpServletResponse对象
+     * @param handler      拦截器的Controller对象
+     * @param modelAndView ModelAndView对象，其中存放的是处理结果和视图的信息
      */
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {

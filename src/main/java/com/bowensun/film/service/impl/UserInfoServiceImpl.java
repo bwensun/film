@@ -34,6 +34,6 @@ public class UserInfoServiceImpl implements UserInfoService {
         //ObjectMapper objectMapper = new ObjectMapper();
         //valueOperations.set("userInfoList", userInfos);
         List<UserInfo> userInfos = userInfoDao.selectUserInfoList();
-        return  userInfos;
+        return userInfos;
     }
 }

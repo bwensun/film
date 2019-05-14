@@ -38,7 +38,7 @@ import java.util.Map;
 public class ShiroConfig {
 
     @Bean
-    public ShiroFilterFactoryBean shiroFilter(SecurityManager securityManager){
+    public ShiroFilterFactoryBean shiroFilter(SecurityManager securityManager) {
         log.info("加载shiro配置<<<<<<<<<<<<<<<<<<<<");
         ShiroFilterFactoryBean shiroFilterFactoryBean = new ShiroFilterFactoryBean();
         shiroFilterFactoryBean.setSecurityManager(securityManager);
@@ -48,7 +48,7 @@ public class ShiroConfig {
         shiroFilterFactoryBean.setSuccessUrl("/index.html");
 
         //拦截器.
-        Map<String,String> filterChainDefinitionMap = new LinkedHashMap<String,String>();
+        Map<String, String> filterChainDefinitionMap = new LinkedHashMap<String, String>();
         // 定义filterChain，静态资源不拦截
         filterChainDefinitionMap.put("/templates/**", "anon");
         filterChainDefinitionMap.put("/static/**", "anon");
@@ -70,15 +70,15 @@ public class ShiroConfig {
     }
 
     @Bean
-    public MyShiroRealm myShiroRealm(){
+    public MyShiroRealm myShiroRealm() {
         MyShiroRealm myShiroRealm = new MyShiroRealm();
         return myShiroRealm;
     }
 
 
     @Bean
-    public DefaultWebSecurityManager securityManager(RedisTemplate redisTemplate){
-        DefaultWebSecurityManager securityManager =  new DefaultWebSecurityManager();
+    public DefaultWebSecurityManager securityManager(RedisTemplate redisTemplate) {
+        DefaultWebSecurityManager securityManager = new DefaultWebSecurityManager();
         securityManager.setRealm(myShiroRealm());
         //securityManager.setRememberMeManager(rememberMeManager());
         securityManager.setCacheManager(shiroRedisCacheManager());
@@ -135,7 +135,7 @@ public class ShiroConfig {
     }
 
     @Bean
-    public CacheManager shiroRedisCacheManager(){
+    public CacheManager shiroRedisCacheManager() {
         return new ShiroRedisCacheManager();
     }
 
@@ -156,7 +156,6 @@ public class ShiroConfig {
         cookieRememberMeManager.setCipherKey(Base64.decode("4AvVhmFLUs0KTA3Kprsdag=="));
         return cookieRememberMeManager;
     }
-
 
 
 }

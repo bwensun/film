@@ -1,9 +1,9 @@
-$(function() {
+$(function () {
     var $dictTableForm = $(".dict-table-form");
     var settings = {
         url: ctx + "dict/list",
         pageSize: 10,
-        queryParams: function(params) {
+        queryParams: function (params) {
             return {
                 pageSize: params.limit,
                 pageNum: params.offset / params.limit + 1,
@@ -14,8 +14,8 @@ $(function() {
             };
         },
         columns: [{
-                checkbox: true
-            },
+            checkbox: true
+        },
             {
                 field: 'dictId',
                 title: '字典ID',
@@ -63,8 +63,8 @@ function deleteDicts() {
     $MB.confirm({
         text: "确定删除选中的字典？",
         confirmButtonText: "确定删除"
-    }, function() {
-        $.post(ctx + 'dict/delete', { "ids": ids }, function(r) {
+    }, function () {
+        $.post(ctx + 'dict/delete', {"ids": ids}, function (r) {
             if (r.code === 0) {
                 $MB.n_success(r.msg);
                 refresh();
@@ -75,22 +75,22 @@ function deleteDicts() {
     });
 }
 
-function exportDictExcel(){
-	$.post(ctx+"dict/excel",$(".dict-table-form").serialize(),function(r){
-		if (r.code === 0) {
-			window.location.href = "common/download?fileName=" + r.msg + "&delete=" + true;
-		} else {
-			$MB.n_warning(r.msg);
-		}
-	});
+function exportDictExcel() {
+    $.post(ctx + "dict/excel", $(".dict-table-form").serialize(), function (r) {
+        if (r.code === 0) {
+            window.location.href = "common/download?fileName=" + r.msg + "&delete=" + true;
+        } else {
+            $MB.n_warning(r.msg);
+        }
+    });
 }
 
-function exportDictCsv(){
-	$.post(ctx+"dict/csv",$(".dict-table-form").serialize(),function(r){
-		if (r.code === 0) {
-			window.location.href = "common/download?fileName=" + r.msg + "&delete=" + true;
-		} else {
-			$MB.n_warning(r.msg);
-		}
-	});
+function exportDictCsv() {
+    $.post(ctx + "dict/csv", $(".dict-table-form").serialize(), function (r) {
+        if (r.code === 0) {
+            window.location.href = "common/download?fileName=" + r.msg + "&delete=" + true;
+        } else {
+            $MB.n_warning(r.msg);
+        }
+    });
 }

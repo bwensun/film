@@ -23,24 +23,24 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 public class Swagger2Config {
 
     @Bean
-    public Docket createRestAPI(){
-      return new Docket(DocumentationType.SWAGGER_2)
-              .apiInfo(apiInfo())
-              .select()
-              .apis(RequestHandlerSelectors.basePackage("com.bowensun.film.web"))
-              .paths(PathSelectors.any())
-              .build();
+    public Docket createRestAPI() {
+        return new Docket(DocumentationType.SWAGGER_2)
+                .apiInfo(apiInfo())
+                .select()
+                .apis(RequestHandlerSelectors.basePackage("com.bowensun.film.web"))
+                .paths(PathSelectors.any())
+                .build();
     }
 
     private ApiInfo apiInfo() {
-      return new ApiInfoBuilder()
-              .title("资源分享<film>")
-              .description("功能测试")
-              //即为contact中的url
-              //.termsOfServiceUrl("http://localhost:8080/api")
-              .contact(new Contact("孙博文", "bowensun.top", "bwensun@foxmail.com"))
-              .version("1.0")
-              .build();
+        return new ApiInfoBuilder()
+                .title("资源分享<film>")
+                .description("功能测试")
+                //即为contact中的url
+                //.termsOfServiceUrl("http://localhost:8080/api")
+                .contact(new Contact("孙博文", "bowensun.top", "bwensun@foxmail.com"))
+                .version("1.0")
+                .build();
     }
 
 }

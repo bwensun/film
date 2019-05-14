@@ -19,7 +19,7 @@ import java.util.List;
  */
 @Mapper
 @Repository
-public interface UserInfoDao{
+public interface UserInfoDao {
 
     //根据用户名查询
     @Select("select * from user_info where username = #{userName}")

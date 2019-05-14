@@ -62,13 +62,13 @@ public class MyShiroRealm extends AuthorizingRealm {
         String username = userInfo.getUsername();
         //获取用户角色列表并去重
         Set<String> roleSet = new HashSet<>();
-        if(!Strings.isNullOrEmpty(username)){
+        if (!Strings.isNullOrEmpty(username)) {
             roleSet = roleDao.selectByUserName(username).stream().map(x -> x.getRole()).collect(Collectors.toSet());
         }
         simpleAuthorizationInfo.setRoles(roleSet);
         //遍历获取角色权限，添加到权限验证中
         Set<String> permissionSet = new HashSet<>();
-        if(!Strings.isNullOrEmpty(username)){
+        if (!Strings.isNullOrEmpty(username)) {
             permissionSet = permissionDao.selectByUserName(username).stream().map(x -> x.getPermission()).collect(Collectors.toSet());
         }
         simpleAuthorizationInfo.setStringPermissions(permissionSet);
@@ -86,14 +86,14 @@ public class MyShiroRealm extends AuthorizingRealm {
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
         log.info("开始进行认证");
         //前台传入
-        String userName = (String)token.getPrincipal();
+        String userName = (String) token.getPrincipal();
         String password = new String((char[]) token.getCredentials());
         UserInfo userInfo = userInfoDao.selectByUserName(userName);
         if (null == userInfo) {
             throw new AccountException("用户名不正确");
         }
         SimpleAuthenticationInfo simpleAuthenticationInfo =
-                new SimpleAuthenticationInfo(userInfo, password,getName());
+                new SimpleAuthenticationInfo(userInfo, password, getName());
         simpleAuthenticationInfo.setCredentialsSalt(ByteSource.Util.bytes(userInfo.getSalt()));
 
         return simpleAuthenticationInfo;

@@ -2,6 +2,7 @@ package com.bowensun.film.domain;
 
 import java.sql.JDBCType;
 import javax.annotation.Generated;
+
 import org.mybatis.dynamic.sql.SqlColumn;
 import org.mybatis.dynamic.sql.SqlTable;
 

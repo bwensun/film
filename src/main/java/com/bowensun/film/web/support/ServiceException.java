@@ -6,7 +6,7 @@ package com.bowensun.film.web.support;
  * @author bowensun
  * @date 2018/4/24
  */
-public class ServiceException extends RuntimeException{
+public class ServiceException extends RuntimeException {
 
     public ErrorCode errorCode;
 

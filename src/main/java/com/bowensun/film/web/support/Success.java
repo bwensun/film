@@ -7,7 +7,7 @@ import java.io.Serializable;
  *
  * @author bowensun
  */
-public class Success implements Result,Serializable {
+public class Success implements Result, Serializable {
     public int code = 200;
 
     public Object data;

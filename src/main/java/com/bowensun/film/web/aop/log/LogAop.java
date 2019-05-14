@@ -23,11 +23,11 @@ import javax.servlet.http.HttpServletRequest;
 @Aspect
 @Component
 public class LogAop {
-    
+
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Pointcut("@annotation(LogT)")
-    public void log(){
+    public void log() {
 
     }
 
@@ -40,12 +40,12 @@ public class LogAop {
 
         Object[] args = point.getArgs();
         String methodName = point.toShortString();
-        logger.info("===========>开始调用:"+ methodName +"<================");
+        logger.info("===========>开始调用:" + methodName + "<================");
         Object result = point.proceed();
         long end = System.currentTimeMillis();
         long costTime = end - start;
-        logger.info("方法名:"+ methodName + "  请求用时："+ costTime + "ms  参数:" + JSON.toJSON(args) + "  响应结果: " + JSON.toJSON(result));
-        logger.info("===========>结束调用:"+ methodName +"<================");
+        logger.info("方法名:" + methodName + "  请求用时：" + costTime + "ms  参数:" + JSON.toJSON(args) + "  响应结果: " + JSON.toJSON(result));
+        logger.info("===========>结束调用:" + methodName + "<================");
         return result;
     }
 }

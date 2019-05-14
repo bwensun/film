@@ -1,5 +1,5 @@
-$(function() {
-    $.getJSON(ctx + "file/city.json", function(r) {
+$(function () {
+    $.getJSON(ctx + "file/city.json", function (r) {
         $('#search-form').autocomplete({
             hints: r,
             placeholder: '城市名',
@@ -7,7 +7,7 @@ $(function() {
             width: 300,
             height: 29,
             valuename: 'countyname',
-            onSubmit: function(text) {
+            onSubmit: function (text) {
                 $('#areaId').text(text);
             }
         });
@@ -18,7 +18,7 @@ $(function() {
 function search() {
     var areaId = $('#areaId').text();
     if (areaId.length) {
-        $.post(ctx + "weather/query", { "areaId": areaId }, function(r) {
+        $.post(ctx + "weather/query", {"areaId": areaId}, function (r) {
             if (r.code === 0) {
                 var data = JSON.parse(r.msg);
                 if (data.code == 200) {

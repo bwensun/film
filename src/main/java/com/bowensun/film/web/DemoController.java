@@ -21,6 +21,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
 
@@ -48,7 +49,7 @@ public class DemoController {
     @GetMapping(value = "query")
     @LogT
     @ApiOperation(value = "根据用户名查询数据", notes = "测试DynamicSQL功能")
-    public List<USER> userDemo(){
+    public List<USER> userDemo() {
         //PageHelper.startPage(1, 10);
         List<USER> users = userMapper.selectByExample() //.where(USERDynamicSqlSupport.name, isEqualTo("zjx"), or(USERDynamicSqlSupport.username, isEqualTo("千仞雪")))
                 .build()
@@ -65,7 +66,7 @@ public class DemoController {
 
     @LogT
     @GetMapping(value = "/test1")
-    public List<UserInfo> test1(){
+    public List<UserInfo> test1() {
         PageHelper.startPage(1, 10);
         List<UserInfo> userInfos = userInfoDao.selectUserInfoList();
         return userInfos;
@@ -73,7 +74,7 @@ public class DemoController {
 
 
     @GetMapping(value = "/jpa")
-    public List<UserInfo> test2(){
+    public List<UserInfo> test2() {
         PageHelper.startPage(1, 10);
         //List<UserInfo> userInfos = userInfoDao.findAll();
         Sort sort = new Sort(Sort.Direction.DESC, "state");

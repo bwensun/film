@@ -16,17 +16,17 @@ public class BaseController {
     private static Logger logger = LoggerFactory.getLogger(BaseController.class);
 
 
-    public String handleException(Exception e, HttpServletRequest request){
+    public String handleException(Exception e, HttpServletRequest request) {
         ErrorCode errorCode = ErrorCode.INTERNAL_ERROR;
-        String error ="";
+        String error = "";
         Result result = null;
-        if(e instanceof ServiceException){
+        if (e instanceof ServiceException) {
             errorCode = ((ServiceException) e).errorCode;
-            result = new Error(errorCode.code,errorCode.message);
-        }else{
-            result = new Error(errorCode.code,errorCode.message);
+            result = new Error(errorCode.code, errorCode.message);
+        } else {
+            result = new Error(errorCode.code, errorCode.message);
         }
-        logger.info("接口：{}异常，异常状态码：{}，异常信息：{}",request.getRequestURI(),errorCode.code,e);
+        logger.info("接口：{}异常，异常状态码：{}，异常信息：{}", request.getRequestURI(), errorCode.code, e);
         ObjectMapper ObjectMapper = new ObjectMapper();
         try {
             error = ObjectMapper.writeValueAsString(result);

@@ -1,4 +1,4 @@
-$(function() {
+$(function () {
     initTreeTable();
 });
 
@@ -13,9 +13,9 @@ function initTreeTable() {
             deptName: $(".dept-table-form").find("input[name='deptName']").val().trim()
         },
         columns: [{
-                field: 'selectItem',
-                checkbox: true
-            },
+            field: 'selectItem',
+            checkbox: true
+        },
             {
                 title: '编号',
                 field: 'deptId',
@@ -59,8 +59,8 @@ function deleteDepts() {
     $MB.confirm({
         text: "确定删除选中部门？",
         confirmButtonText: "确定删除"
-    }, function() {
-        $.post(ctx + 'dept/delete', { "ids": ids_arr }, function(r) {
+    }, function () {
+        $.post(ctx + 'dept/delete', {"ids": ids_arr}, function (r) {
             if (r.code === 0) {
                 $MB.n_success(r.msg);
                 refresh();
@@ -71,22 +71,22 @@ function deleteDepts() {
     });
 }
 
-function exportDeptExcel(){
-	$.post(ctx+"dept/excel",$(".dept-table-form").serialize(),function(r){
-		if (r.code === 0) {
-			window.location.href = "common/download?fileName=" + r.msg + "&delete=" + true;
-		} else {
-			$MB.n_warning(r.msg);
-		}
-	});
+function exportDeptExcel() {
+    $.post(ctx + "dept/excel", $(".dept-table-form").serialize(), function (r) {
+        if (r.code === 0) {
+            window.location.href = "common/download?fileName=" + r.msg + "&delete=" + true;
+        } else {
+            $MB.n_warning(r.msg);
+        }
+    });
 }
 
-function exportDeptCsv(){
-	$.post(ctx+"dept/csv",$(".dept-table-form").serialize(),function(r){
-		if (r.code === 0) {
-			window.location.href = "common/download?fileName=" + r.msg + "&delete=" + true;
-		} else {
-			$MB.n_warning(r.msg);
-		}
-	});
+function exportDeptCsv() {
+    $.post(ctx + "dept/csv", $(".dept-table-form").serialize(), function (r) {
+        if (r.code === 0) {
+            window.location.href = "common/download?fileName=" + r.msg + "&delete=" + true;
+        } else {
+            $MB.n_warning(r.msg);
+        }
+    });
 }

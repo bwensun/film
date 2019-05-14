@@ -29,6 +29,7 @@ public class FilmWebMvcConfigurerAdapter extends WebMvcConfigurerAdapter {
 
     /**
      * 拦截器
+     *
      * @param registry
      */
     @Override
@@ -36,7 +37,7 @@ public class FilmWebMvcConfigurerAdapter extends WebMvcConfigurerAdapter {
         // addPathPatterns 用于添加拦截规则
         // excludePathPatterns 用户排除拦截
         registry.addInterceptor(new TestInterceptor()).addPathPatterns("/**");
-               // .excludePathPatterns("/swagger-resources/**", "/webjars/**", "/v2/**", "/swagger-ui.html/**");
+        // .excludePathPatterns("/swagger-resources/**", "/webjars/**", "/v2/**", "/swagger-ui.html/**");
         super.addInterceptors(registry);
     }
 }

@@ -4,8 +4,10 @@ import static com.bowensun.film.repository.USERDynamicSqlSupport.*;
 import static org.mybatis.dynamic.sql.SqlBuilder.*;
 
 import com.bowensun.film.domain.USER;
+
 import java.util.List;
 import javax.annotation.Generated;
+
 import org.apache.ibatis.annotations.DeleteProvider;
 import org.apache.ibatis.annotations.InsertProvider;
 import org.apache.ibatis.annotations.Mapper;
@@ -33,32 +35,32 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface USERMapper {
     @Generated("org.mybatis.generator.api.MyBatisGenerator")
-    @DeleteProvider(type=SqlProviderAdapter.class, method="delete")
+    @DeleteProvider(type = SqlProviderAdapter.class, method = "delete")
     int delete(DeleteStatementProvider deleteStatement);
 
     @Generated("org.mybatis.generator.api.MyBatisGenerator")
-    @InsertProvider(type=SqlProviderAdapter.class, method="insert")
+    @InsertProvider(type = SqlProviderAdapter.class, method = "insert")
     int insert(InsertStatementProvider<USER> insertStatement);
 
     @Generated("org.mybatis.generator.api.MyBatisGenerator")
-    @SelectProvider(type=SqlProviderAdapter.class, method="select")
+    @SelectProvider(type = SqlProviderAdapter.class, method = "select")
     @ResultMap("USERResult")
     USER selectOne(SelectStatementProvider selectStatement);
 
     @Generated("org.mybatis.generator.api.MyBatisGenerator")
-    @SelectProvider(type=SqlProviderAdapter.class, method="select")
-    @Results(id="USERResult", value = {
-        @Result(column="uid", property="uid", jdbcType=JdbcType.INTEGER, id=true),
-        @Result(column="name", property="name", jdbcType=JdbcType.VARCHAR),
-        @Result(column="password", property="password", jdbcType=JdbcType.VARCHAR),
-        @Result(column="salt", property="salt", jdbcType=JdbcType.VARCHAR),
-        @Result(column="state", property="state", jdbcType=JdbcType.TINYINT),
-        @Result(column="username", property="username", jdbcType=JdbcType.VARCHAR)
+    @SelectProvider(type = SqlProviderAdapter.class, method = "select")
+    @Results(id = "USERResult", value = {
+            @Result(column = "uid", property = "uid", jdbcType = JdbcType.INTEGER, id = true),
+            @Result(column = "name", property = "name", jdbcType = JdbcType.VARCHAR),
+            @Result(column = "password", property = "password", jdbcType = JdbcType.VARCHAR),
+            @Result(column = "salt", property = "salt", jdbcType = JdbcType.VARCHAR),
+            @Result(column = "state", property = "state", jdbcType = JdbcType.TINYINT),
+            @Result(column = "username", property = "username", jdbcType = JdbcType.VARCHAR)
     })
     List<USER> selectMany(SelectStatementProvider selectStatement);
 
     @Generated("org.mybatis.generator.api.MyBatisGenerator")
-    @UpdateProvider(type=SqlProviderAdapter.class, method="update")
+    @UpdateProvider(type = SqlProviderAdapter.class, method = "update")
     int update(UpdateStatementProvider updateStatement);
 
     @Generated("org.mybatis.generator.api.MyBatisGenerator")

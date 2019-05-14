@@ -64,21 +64,21 @@ public class RedisConfig extends CachingConfigurerSupport {
 
     @Bean(value = "customerKeyGenerator")
     @Override
-    public KeyGenerator keyGenerator(){
+    public KeyGenerator keyGenerator() {
         return new KeyGenerator() {
             @Override
             public Object generate(Object target, Method method, Object... params) {
                 StringBuilder key = new StringBuilder();
                 key.append(target.getClass().getSimpleName());
                 key.append(":").append(method.getName());
-                key.append(StringUtils.arrayToDelimitedString(params,"_")) ;
+                key.append(StringUtils.arrayToDelimitedString(params, "_"));
                 return key.toString();
             }
         };
     }
 
     @Bean
-    public ValueOperations<String, Object> opsForValue(RedisTemplate<String, Object> redisTemplate){
+    public ValueOperations<String, Object> opsForValue(RedisTemplate<String, Object> redisTemplate) {
         return redisTemplate.opsForValue();
     }
 

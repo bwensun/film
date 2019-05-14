@@ -3,9 +3,9 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="edge" />
+    <meta http-equiv="X-UA-Compatible" content="edge"/>
     <title>FEBS权限管理系统</title>
-    <link rel="shortcut icon" type="image/png" th:href="@{/img/favicon.ico}" />
+    <link rel="shortcut icon" type="image/png" th:href="@{/img/favicon.ico}"/>
     <link rel="stylesheet" th:href="@{css/login.css}" type="text/css">
     <link rel="stylesheet" th:href="@{css/iCheck/minimal/green.css}" type="text/css">
     <link rel="stylesheet" th:href="@{css/app.css}" type="text/css">
@@ -30,20 +30,20 @@
         <div class="form-content">
             <div class="form-group">
                 <label>用户名</label>
-                <input type="text" name="username" />
+                <input type="text" name="username"/>
             </div>
             <div class="form-group">
                 <label>密码</label>
-                <input type="password" name="password" />
+                <input type="password" name="password"/>
             </div>
             <div class="form-group" style="display:inline-block">
                 <label>验证码</label>
-                <input type="text" name="code" style="width:50%; display:inline-block" />
-                <img data-th-src="@{gifCode}" id="validateCodeImg" onclick="reloadCode()" style="display:inline-block" />
+                <input type="text" name="code" style="width:50%; display:inline-block"/>
+                <img data-th-src="@{gifCode}" id="validateCodeImg" onclick="reloadCode()" style="display:inline-block"/>
             </div>
             <div class="form-group" style="margin: 0px;">
                 <p>
-                    <input type="checkbox" name="rememberme" />&nbsp;&nbsp;记住我</p>
+                    <input type="checkbox" name="rememberme"/>&nbsp;&nbsp;记住我</p>
             </div>
             <div class="form-group">
                 <button onclick="login()" id="loginButton">登录</button>
@@ -57,15 +57,15 @@
         <div class="form-content">
             <div class="form-group">
                 <label>用户名</label>
-                <input type="text" name="username" />
+                <input type="text" name="username"/>
             </div>
             <div class="form-group">
                 <label>密码</label>
-                <input type="password" name="password" />
+                <input type="password" name="password"/>
             </div>
             <div class="form-group">
                 <label>确认密码</label>
-                <input type="password" name="cpassword" />
+                <input type="password" name="cpassword"/>
             </div>
             <div class="form-group">
                 <button onclick="regist()">注册</button>
@@ -76,7 +76,8 @@
 <div data-th-include="common/footer"></div>
 </body>
 <script th:inline="javascript">
-    var ctx = [[@{/}]];
+    var ctx = [[@{
+        /}]];
 </script>
 <script data-th-src="@{js/app/login.js}"></script>
 </html>
