@@ -44,19 +44,21 @@ public class UserServiceImpl implements UserService {
         return userMapper.selectByPrimaryKey(uid);
     }
 
-    @CacheEvict(cacheNames = {"user", "userList"}, allEntries = true)
+    @CacheEvict(cacheNames = {"user", "userList"}, allEntries = true, beforeInvocation = true)
     @Override
     public void deleteByPrimaryKey(Integer uid) {
-         userMapper.deleteByPrimaryKey(uid);
+        userMapper.deleteByPrimaryKey(uid);
     }
 
-    @CacheEvict(cacheNames = {"user", "userList"}, allEntries = true)
+    @CacheEvict(cacheNames = {"user", "userList"}, allEntries = true, beforeInvocation = true)
+    //@CachePut(cacheNames = "user", key = "'user:' + #user.uid")
     @Override
-    public void updateByPrimaryKeySelective(USER user) {
+    public USER updateByPrimaryKeySelective(USER user) {
         userMapper.updateByPrimaryKeySelective(user);
+        return user;
     }
 
-    @CacheEvict(cacheNames = {"user", "userList"}, allEntries = true)
+    @CacheEvict(cacheNames = {"user", "userList"}, allEntries = true, beforeInvocation = true)
     @Override
     public void insertByPrimaryKeySelective(USER user) {
         userMapper.insertSelective(user);

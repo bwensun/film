@@ -19,7 +19,7 @@ public interface UserService {
 
     void deleteByPrimaryKey(Integer uid);
 
-    void updateByPrimaryKeySelective(USER user);
+    USER updateByPrimaryKeySelective(USER user);
 
     void insertByPrimaryKeySelective(USER user);
 }

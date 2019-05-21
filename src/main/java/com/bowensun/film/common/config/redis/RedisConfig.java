@@ -10,9 +10,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.cache.RedisCacheManager;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
-import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.core.StringRedisTemplate;
-import org.springframework.data.redis.core.ValueOperations;
+import org.springframework.data.redis.core.*;
 import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 import org.springframework.util.StringUtils;
@@ -80,6 +78,26 @@ public class RedisConfig extends CachingConfigurerSupport {
     @Bean
     public ValueOperations<String, Object> opsForValue(RedisTemplate<String, Object> redisTemplate) {
         return redisTemplate.opsForValue();
+    }
+
+    @Bean
+    public HashOperations<String, Object, Object> opsForHash(RedisTemplate<String, Object> redisTemplate) {
+        return redisTemplate.opsForHash();
+    }
+
+    @Bean
+    public SetOperations<String, Object> opsForSet(RedisTemplate<String, Object> redisTemplate) {
+        return redisTemplate.opsForSet();
+    }
+
+    @Bean
+    public ZSetOperations<String, Object> opsForZSet(RedisTemplate<String, Object> redisTemplate) {
+        return redisTemplate.opsForZSet();
+    }
+
+    @Bean
+    public GeoOperations<String, Object> opsForGeo(RedisTemplate<String, Object> redisTemplate) {
+        return redisTemplate.opsForGeo();
     }
 
 }
