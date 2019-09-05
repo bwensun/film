@@ -5,10 +5,13 @@ import com.bowensun.film.repository.USERMapper;
 import com.bowensun.film.service.UserService;
 import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.annotation.PropertySources;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -21,13 +24,19 @@ import java.util.List;
  */
 @Service
 @CacheConfig
+@PropertySources({@PropertySource("classpath:test.properties")})
 public class UserServiceImpl implements UserService {
 
     @Autowired
     private USERMapper userMapper;
 
+    @Value("${test.url}")
+    private String testUrl;
+
+
     @Override
     public List<USER> selectUserInfoList() {
+        System.out.println("-----"+ testUrl);
         return null;
     }
 
@@ -63,4 +72,7 @@ public class UserServiceImpl implements UserService {
     public void insertByPrimaryKeySelective(USER user) {
         userMapper.insertSelective(user);
     }
+
+
+
 }
