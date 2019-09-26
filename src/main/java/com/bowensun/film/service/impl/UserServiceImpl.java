@@ -37,7 +37,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<USER> selectUserInfoList() {
         System.out.println("-----"+ testUrl);
-        return null;
+        return userMapper.selectByExample().build().execute();
     }
 
     @Cacheable(cacheNames = "userList", key = "'userList:'+#pageNumber+'_'+#pageSize")
