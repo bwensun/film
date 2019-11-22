@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
-import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.annotation.PropertySources;
@@ -36,8 +35,9 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<USER> selectUserInfoList() {
-        System.out.println("-----"+ testUrl);
+        //PageHelper.startPage(1, 10);
         return userMapper.selectByExample().build().execute();
+        //return new PageInfo<USER>(userList);
     }
 
     @Cacheable(cacheNames = "userList", key = "'userList:'+#pageNumber+'_'+#pageSize")
@@ -73,6 +73,10 @@ public class UserServiceImpl implements UserService {
         userMapper.insertSelective(user);
     }
 
+    @Override
+    public void insert(USER user) {
+        userMapper.insertSelective(user);
+    }
 
 
 }

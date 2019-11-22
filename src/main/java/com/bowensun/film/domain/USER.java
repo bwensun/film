@@ -1,21 +1,28 @@
 package com.bowensun.film.domain;
 
 import cn.afterturn.easypoi.excel.annotation.Excel;
+import com.alibaba.fastjson.annotation.JSONField;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonView;
 import lombok.Builder;
+import lombok.Data;
 
 import javax.annotation.Generated;
 
-@Builder
+@Data
 public class USER {
+
 
     @Generated("org.mybatis.generator.api.MyBatisGenerator")
     @Excel(name = "ID", height = 8, width = 14)
     private Integer uid;
 
+    @JsonView(UserListView.class)
     @Generated("org.mybatis.generator.api.MyBatisGenerator")
     @Excel(name = "用户姓名", height = 8, width = 14)
     private String name;
 
+    @JsonView(UserListView.class)
     @Generated("org.mybatis.generator.api.MyBatisGenerator")
     @Excel(name = "密码", height = 8, width = 14)
     private String password;
@@ -91,4 +98,7 @@ public class USER {
     public void setUsername(String username) {
         this.username = username == null ? null : username.trim();
     }
+
+
+    public interface UserListView{};
 }

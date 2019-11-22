@@ -22,4 +22,6 @@ public interface UserService {
     USER updateByPrimaryKeySelective(USER user);
 
     void insertByPrimaryKeySelective(USER user);
+
+    void insert(USER user);
 }

@@ -9,12 +9,17 @@ import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
+
+/**
+ * @author 郑建雄
+ */
 @ControllerAdvice
 @CrossOrigin
 public class BaseController {
 
-    private static Logger logger = LoggerFactory.getLogger(BaseController.class);
 
+
+    private static Logger logger = LoggerFactory.getLogger(BaseController.class);
 
     public String handleException(Exception e, HttpServletRequest request) {
         ErrorCode errorCode = ErrorCode.INTERNAL_ERROR;

@@ -36,18 +36,13 @@ import java.math.RoundingMode;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 
 /**
  * @author 郑建雄
- * @program film
- * @description
  * @date 2019/3/18
  */
 @RestController
@@ -92,25 +87,11 @@ public class DemoController {
 
 
     public static void main(String[] args) throws URISyntaxException {
-        List<USER> users =new ArrayList<USER>(8) ;
-        users.add(USER.builder().name("张三").password("123").build());
-        users.add(USER.builder().name("里斯").build());
-        List<HashMap<String, Object>> hashMapList = users.stream().map(x -> {
-            HashMap<String, Object> map = new HashMap(8);
-            Class<? extends USER> clazz = x.getClass();
-            for (Field field : clazz.getDeclaredFields()) {
-                field.setAccessible(true);
-                String fieldName = field.getName();
-                try {
-                    Object o = field.get(x);
-                    map.put(fieldName, o);
-                } catch (IllegalAccessException e) {
-                    e.printStackTrace();
-                }
-            }
-            return map;
-        }).collect(Collectors.toList());
-        System.out.println("");
+        ArrayList<String> list = new ArrayList<>();
+        for (int i = 0; i < 38; i++) {
+            String s = UUID.randomUUID().toString().replace("-", "").substring(0, 8);
+            System.out.println(s);
+        }
     }
 
     @LogT
@@ -132,20 +113,20 @@ public class DemoController {
     @LogT
     @PostMapping(value = "/export")
     public void export(HttpServletResponse response) throws IOException {
-        List<USER> users = userService.selectUserInfoList();
-        ExportParams exportParams = new ExportParams("用户信息表", "用户信息");
-        Workbook workbook = ExcelExportUtil.exportExcel(exportParams, USER.class, users);
-        workbook.write(response.getOutputStream());
-        response.getOutputStream().flush();
+//        List<USER> users = userService.selectUserInfoList();
+//        ExportParams exportParams = new ExportParams("用户信息表", "用户信息");
+//        Workbook workbook = ExcelExportUtil.exportExcel(exportParams, USER.class, users);
+//        workbook.write(response.getOutputStream());
+//        response.getOutputStream().flush();
     }
 
     @LogT
     @PostMapping(value = "/templateExport")
     public void templateExport(HttpServletResponse response) throws IOException {
-        TemplateExportParams templateExportParams = new TemplateExportParams("export/templateExport.xlsx");
-        List<USER> users = userService.selectUserInfoList();
-        List<Object> collect = users.stream().map(x -> JSONObject.toJSON(x))
-                .collect(Collectors.toList());
+//        TemplateExportParams templateExportParams = new TemplateExportParams("export/templateExport.xlsx");
+//        List<USER> users = userService.selectUserInfoList();
+//        List<Object> collect = users.stream().map(x -> JSONObject.toJSON(x))
+//                .collect(Collectors.toList());
 //        Workbook workbook = ExcelExportUtil.exportExcel(templateExportParams,);
 //        workbook.write(response.getOutputStream());
 //        response.getOutputStream().flush();
