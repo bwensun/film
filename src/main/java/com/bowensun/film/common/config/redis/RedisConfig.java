@@ -8,14 +8,20 @@ import org.springframework.cache.annotation.CachingConfigurerSupport;
 import org.springframework.cache.interceptor.KeyGenerator;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.redis.cache.RedisCacheConfiguration;
 import org.springframework.data.redis.cache.RedisCacheManager;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
+import org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory;
 import org.springframework.data.redis.core.*;
 import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
+import org.springframework.data.redis.serializer.RedisSerializationContext;
+import org.springframework.data.redis.serializer.RedisSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 import org.springframework.util.StringUtils;
 
+import javax.annotation.Resource;
 import java.lang.reflect.Method;
+import java.time.Duration;
 
 
 /**
@@ -26,6 +32,7 @@ import java.lang.reflect.Method;
  */
 @Configuration
 public class RedisConfig extends CachingConfigurerSupport {
+
 
     @Bean
     public RedisTemplate<String, Object> redisTemplate(RedisConnectionFactory factory) {
@@ -49,15 +56,6 @@ public class RedisConfig extends CachingConfigurerSupport {
         //TODO 为value值设置jackson序列化
         template.setValueSerializer(jackson2JsonRedisSerializer);
         template.setHashValueSerializer(jackson2JsonRedisSerializer);
-    }
-
-    // 缓存管理器
-    @Bean
-    public CacheManager cacheManager(RedisTemplate redisTemplate) {
-        RedisCacheManager cacheManager = new RedisCacheManager(redisTemplate);
-        // 设置缓存过期时间（秒）
-        cacheManager.setDefaultExpiration(3600);
-        return cacheManager;
     }
 
     @Bean(value = "customerKeyGenerator")
@@ -90,6 +88,7 @@ public class RedisConfig extends CachingConfigurerSupport {
         return redisTemplate.opsForSet();
     }
 
+    @SuppressWarnings("AlibabaLowerCamelCaseVariableNaming")
     @Bean
     public ZSetOperations<String, Object> opsForZSet(RedisTemplate<String, Object> redisTemplate) {
         return redisTemplate.opsForZSet();

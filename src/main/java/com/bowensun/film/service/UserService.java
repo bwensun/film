@@ -1,6 +1,7 @@
 package com.bowensun.film.service;
 
 import com.bowensun.film.domain.USER;
+import com.github.pagehelper.PageInfo;
 
 import java.util.List;
 
@@ -13,7 +14,7 @@ import java.util.List;
 public interface UserService {
     List<USER> selectUserInfoList();
 
-    List<USER> selectUserInfoList(Integer pageNumber, Integer pageSize);
+    PageInfo<USER> selectUserInfoList(Integer pageNumber, Integer pageSize);
 
     USER selectByPrimaryKey(Integer uid);
 

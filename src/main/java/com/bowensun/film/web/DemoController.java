@@ -1,28 +1,13 @@
 package com.bowensun.film.web;
 
-import cn.afterturn.easypoi.excel.ExcelExportUtil;
-import cn.afterturn.easypoi.excel.entity.ExportParams;
-import cn.afterturn.easypoi.excel.entity.TemplateExportParams;
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
 import com.bowensun.film.domain.USER;
 
-import com.bowensun.film.repository.USERMapper;
-import com.bowensun.film.repository.mybatis.UserInfoDao;
-import com.bowensun.film.repository.jpa.UserRepository;
 import com.bowensun.film.service.UserService;
 import com.bowensun.film.web.aop.log.LogT;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.github.pagehelper.PageHelper;
-import com.google.common.collect.Maps;
+import com.github.pagehelper.PageInfo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import jdk.nashorn.internal.runtime.regexp.joni.Regex;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
-import org.apache.poi.ss.usermodel.Workbook;
-import org.dozer.DozerBeanMapper;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.web.bind.annotation.*;
@@ -30,15 +15,9 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.lang.reflect.Field;
-import java.math.BigDecimal;
-import java.math.RoundingMode;
-import java.net.URI;
 import java.net.URISyntaxException;
-import java.text.SimpleDateFormat;
+import java.text.ParseException;
 import java.util.*;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 
 /**
@@ -57,7 +36,7 @@ public class DemoController {
     @LogT
     @GetMapping(value = "/userList")
     @ApiOperation(value = "根据用户名查询数据", notes = "测试DynamicSQL功能")
-    public List<USER> selectUserInfoList(Integer pageNumber, Integer pageSize) {
+    public PageInfo<USER> selectUserInfoList(Integer pageNumber, Integer pageSize) {
         return userService.selectUserInfoList(pageNumber, pageSize);
     }
 
@@ -86,11 +65,22 @@ public class DemoController {
     }
 
 
-    public static void main(String[] args) throws URISyntaxException {
-        ArrayList<String> list = new ArrayList<>();
-        for (int i = 0; i < 38; i++) {
-            String s = UUID.randomUUID().toString().replace("-", "").substring(0, 8);
-            System.out.println(s);
+    public static void main(String[] args) throws URISyntaxException, ParseException {
+        ArrayList<USER> strings = new ArrayList<>();
+        USER user = new USER();
+        user.setName("zjx");
+        strings.add(null);
+        strings.add(user);
+        strings.add(user);
+        strings.add(user);
+        strings.add(user);
+        for (USER string : strings) {
+            try {
+                System.out.println(string.getName());
+            }catch (Exception e){
+                System.out.println(e.getMessage());
+
+            }
         }
     }
 
@@ -131,4 +121,6 @@ public class DemoController {
 //        workbook.write(response.getOutputStream());
 //        response.getOutputStream().flush();
     }
+
+
 }

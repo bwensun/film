@@ -3,7 +3,9 @@ package com.bowensun.film.service.impl;
 import com.bowensun.film.domain.USER;
 import com.bowensun.film.repository.USERMapper;
 import com.bowensun.film.service.UserService;
+import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.annotation.CacheConfig;
@@ -40,11 +42,11 @@ public class UserServiceImpl implements UserService {
         //return new PageInfo<USER>(userList);
     }
 
-    @Cacheable(cacheNames = "userList", key = "'userList:'+#pageNumber+'_'+#pageSize")
+    //@Cacheable(cacheNames = "userList", key = "'userList:'+#pageNumber+'_'+#pageSize")
     @Override
-    public List<USER> selectUserInfoList(Integer pageNumber, Integer pageSize) {
+    public PageInfo<USER> selectUserInfoList(Integer pageNumber, Integer pageSize) {
         PageHelper.startPage(pageNumber, pageSize);
-        return userMapper.selectByExample().build().execute();
+        return new PageInfo<>(userMapper.selectByExample().build().execute());
     }
 
     @Cacheable(cacheNames = "user", key = "'user:' + #uid")

@@ -3,7 +3,7 @@ spring:
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
     druid:
-      url: jdbc:mysql://localhost:3306/film?useUnicode=true&characterEncoding=utf-8&autoReconnect=true&autoReconnectForPools=true&failOverReadOnly=false&useSSL=true
+      url: jdbc:mysql://localhost:3306/film?useUnicode=true&characterEncoding=utf-8&autoReconnect=true&autoReconnectForPools=true&failOverReadOnly=false&useSSL=true&serverTimezone=UTC
       username: root
       password: 285413
       #driver-class-name: oracle.jdbc.OracleDriver
@@ -37,7 +37,7 @@ spring:
 
 
     # 配置监控统计拦截的filters，去掉后监控界面sql无法统计，'wall'用于防火墙
-      filters: stat,wall,log4j
+      filters: stat,wall
       connectionProperties: druid.stat.mergeSql=false;druid.stat.slowSqlMillis=5000 # 通过connectProperties属性来打开mergeSql功能；慢SQL记录
       useGlobalDataSourceStat: true # 合并多个DruidDataSource的监控数据
   #  druidLoginName: root # 登录druid的账号
