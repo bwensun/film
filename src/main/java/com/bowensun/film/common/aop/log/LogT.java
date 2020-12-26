@@ -1,4 +1,4 @@
-package com.bowensun.film.web.aop.log;
+package com.bowensun.film.common.aop.log;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

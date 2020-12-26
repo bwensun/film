@@ -4,19 +4,9 @@ spring:
     # 数据库配置
     # type: com.alibaba.druid.pool.DruidDataSource
     active: druid
-  jpa:
-    show-sql: true
-    hibernate:
-      ddl-auto: update
   output:
     ansi:
       enabled: detect
-
-  #模板引擎
-  thymeleaf:
-    #模板缓存
-    cache: false
-    enabled: true
   #静态资源配置
   mvc:
     static-path-pattern: /**
@@ -35,16 +25,11 @@ spring:
     timeout: 5000
   cache:
     type: redis
+  jpa:
+    open-in-view: false
 
-#mybatis配置
-  #配置实体类映射和mappeclasspath:r.xml文件路径
-mybatis:
-  type-aliases-package: com.bowensun.film.domain
-  mapper-locations: classpath:mapper/*.xml
 server:
   port: 8080
-
-#分页插件配置
 
 
 redis.expireTime: 3600
@@ -55,4 +40,8 @@ redis.expireTime: 3600
 
 
 
-
+mybatis-plus:
+  configuration:
+    map-underscore-to-camel-case: true
+  global-config:
+    banner: false

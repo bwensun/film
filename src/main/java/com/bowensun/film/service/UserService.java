@@ -1,28 +1,34 @@
 package com.bowensun.film.service;
 
-import com.bowensun.film.domain.USER;
-import com.github.pagehelper.PageInfo;
+
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.bowensun.film.domain.UserPO;
+import com.bowensun.film.domain.dto.UserDTO;
+import com.bowensun.film.domain.vo.UserVO;
 
 import java.util.List;
 
 /**
- * description
+ * 用户service
  *
  * @author bowensun
  * @date 2018/11/9
  */
 public interface UserService {
-    List<USER> selectUserInfoList();
 
-    PageInfo<USER> selectUserInfoList(Integer pageNumber, Integer pageSize);
+    /**
+     * 用户分页查询
+     *
+     * @param user UserDTO
+     * @return PageInfo<UserPO>
+     */
+    Page<UserPO> selectPage(UserDTO user);
 
-    USER selectByPrimaryKey(Integer uid);
-
-    void deleteByPrimaryKey(Integer uid);
-
-    USER updateByPrimaryKeySelective(USER user);
-
-    void insertByPrimaryKeySelective(USER user);
-
-    void insert(USER user);
+    /**
+     * list查询
+     *
+     * @param user user
+     * @return List<UserVO>
+     */
+    List<UserVO> selectList(UserDTO user);
 }

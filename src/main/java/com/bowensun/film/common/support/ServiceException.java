@@ -1,4 +1,4 @@
-package com.bowensun.film.web.support;
+package com.bowensun.film.common.support;
 
 /**
  * 业务异常类

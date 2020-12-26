@@ -7,7 +7,7 @@ spring:
       username: root
       password: 285413
       #driver-class-name: oracle.jdbc.OracleDriver
-      driver-class-name: com.mysql.jdbc.Driver
+      driver-class-name: com.mysql.cj.jdbc.Driver
       #初始化时建立物理连接的个数
       initial-size: 10
       #最大连接数量

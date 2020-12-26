@@ -1,41 +1,69 @@
 package com.bowensun.film.web;
 
-import com.bowensun.film.domain.USER;
+import com.alibaba.excel.EasyExcel;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.bowensun.film.common.excel.handler.LogWriteHandle;
+import com.bowensun.film.common.util.ExcelUtil;
+import com.bowensun.film.domain.UserPO;
+import com.bowensun.film.domain.dto.UserDTO;
+import com.bowensun.film.domain.vo.UserVO;
 import com.bowensun.film.service.UserService;
-import com.bowensun.film.web.support.BaseController;
-import com.fasterxml.jackson.annotation.JsonView;
-import lombok.RequiredArgsConstructor;
+import com.bowensun.film.common.aop.log.LogT;
+import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.net.URLEncoder;
+import java.util.*;
 
-import java.util.List;
 
 /**
+ * 用户控制器
+ *
  * @author 郑建雄
- * @date 2019/11/22
+ * @date 2019/3/18
  */
 @RestController
-@RequestMapping("user")
+@RequestMapping(value = "user")
 @Slf4j
-@RequiredArgsConstructor(onConstructor = @__(@Autowired))
-public class UserController extends BaseController {
+public class UserController {
 
+    @Resource
+    private UserService userService;
 
-    private final UserService userService;
-
-    @GetMapping("userList")
-    @JsonView(USER.UserListView.class)
-    public List<USER> getUserList(){
-        log.info("====>");
-        return userService.selectUserInfoList();
+    @LogT
+    @GetMapping(value = "/page")
+    public Page<UserPO> selectPage(@RequestBody UserDTO user) {
+        return userService.selectPage(user);
     }
 
-    @PostMapping("add")
-    public void insert(USER user){
-         userService.insert(user);
+    @LogT
+    @GetMapping(value = "/list")
+    public List<UserVO> selectList(@RequestBody UserDTO user) {
+        return userService.selectList(user);
     }
+
+    @LogT
+    @PostMapping(value = "/export")
+    @SneakyThrows
+    public void export(@RequestBody UserDTO user, HttpServletResponse response){
+        List<UserVO> userVOList = userService.selectList(user);
+        ExcelUtil.prepareExport(response, "用户列表");
+        EasyExcel.write(response.getOutputStream(), UserVO.class)
+                .registerWriteHandler(ExcelUtil.defaultCellStyle())
+                .registerWriteHandler(ExcelUtil.defaultWidthStyle())
+                .registerWriteHandler(new LogWriteHandle())
+                .sheet("用户列表")
+                .doWrite(userVOList);
+    }
+
+    @LogT
+    @PostMapping(value = "/templateExport")
+    public void templateExport(HttpServletResponse response) throws IOException {
+
+    }
+
+
 }
