@@ -1,8 +1,6 @@
 spring:
   #引入外部文件
   profiles:
-    # 数据库配置
-    # type: com.alibaba.druid.pool.DruidDataSource
     active: druid
   output:
     ansi:

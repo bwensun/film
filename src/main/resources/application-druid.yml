@@ -3,9 +3,9 @@ spring:
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
     druid:
-      url: jdbc:mysql://localhost:3306/film?useUnicode=true&characterEncoding=utf-8&autoReconnect=true&autoReconnectForPools=true&failOverReadOnly=false&useSSL=true&serverTimezone=UTC
+      url: jdbc:mysql://114.215.86.43:3306/film?useUnicode=true&characterEncoding=utf-8&autoReconnect=true&autoReconnectForPools=true&failOverReadOnly=false&useSSL=true&serverTimezone=UTC
       username: root
-      password: 285413
+      password: '!EeXZY8d'
       #driver-class-name: oracle.jdbc.OracleDriver
       driver-class-name: com.mysql.cj.jdbc.Driver
       #初始化时建立物理连接的个数
