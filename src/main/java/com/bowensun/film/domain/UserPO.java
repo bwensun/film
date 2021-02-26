@@ -4,6 +4,8 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
+
 import java.util.Date;
 
 
@@ -16,6 +18,7 @@ import java.util.Date;
 @Getter
 @Setter
 @TableName("user")
+@ToString
 public class UserPO {
 
     /**
@@ -53,11 +56,6 @@ public class UserPO {
      * 生日
      */
     private Date birthday;
-
-    /**
-     * 测试时间
-     */
-    private Date testDate;
 
     /**
      * 创建时间

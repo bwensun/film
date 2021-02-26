@@ -15,27 +15,24 @@ spring:
     password: zyWxznV
     host: 47.103.215.103
     port: 6379
-    pool:
-      max-active: 300
-      max-wait: 3000
-      max-idle: 4000
-      min-idle: 100
     timeout: 5000
+    jedis:
+      pool:
+        max-active: 300
+        max-wait: 3000
+        max-idle: 4000
+        min-idle: 100
   cache:
     type: redis
   jpa:
     open-in-view: false
 
 server:
-  port: 8080
+  port: 9090
 
 
-redis.expireTime: 3600
-
-
-
-
-
+redis:
+  expireTime: 3600
 
 
 mybatis-plus:

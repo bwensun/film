@@ -2,7 +2,9 @@ package com.bowensun.film.web;
 
 import com.alibaba.excel.EasyExcel;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.bowensun.film.common.excel.handler.LogWriteHandle;
+import com.bowensun.film.common.excel.handler.DefaultCellStyleStrategy;
+import com.bowensun.film.common.excel.handler.DefaultColumnWidthStrategy;
+import com.bowensun.film.common.excel.handler.DefaultWriteHandler;
 import com.bowensun.film.common.util.ExcelUtil;
 import com.bowensun.film.domain.UserPO;
 import com.bowensun.film.domain.dto.UserDTO;
@@ -15,7 +17,6 @@ import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.net.URLEncoder;
 import java.util.*;
 
 
@@ -52,10 +53,11 @@ public class UserController {
         List<UserVO> userVOList = userService.selectList(user);
         ExcelUtil.prepareExport(response, "用户列表");
         EasyExcel.write(response.getOutputStream(), UserVO.class)
-                .registerWriteHandler(ExcelUtil.defaultCellStyle())
-                .registerWriteHandler(ExcelUtil.defaultWidthStyle())
-                .registerWriteHandler(new LogWriteHandle())
+                .useDefaultStyle(false)
                 .sheet("用户列表")
+                //.registerWriteHandler(new DefaultCellStyleStrategy())
+                //.registerWriteHandler(new DefaultColumnWidthStrategy())
+                .registerWriteHandler(new DefaultWriteHandler())
                 .doWrite(userVOList);
     }
 

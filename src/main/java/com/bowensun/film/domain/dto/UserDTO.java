@@ -56,10 +56,6 @@ public class UserDTO extends Page {
      */
     private Date birthday;
 
-    /**
-     * 测试时间
-     */
-    private Date testDate;
 
     /**
      * 创建时间
