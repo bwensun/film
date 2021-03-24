@@ -38,6 +38,6 @@ public class TestController {
      */
     @RequestMapping("nestedConfigurationProperty")
     public void testNestedConfigurationProperty(){
-        System.out.println(customProperties.getTaskProperties().getSyncTimes());
+        System.out.println(customProperties.getTask().getSyncTimes());
     }
 }

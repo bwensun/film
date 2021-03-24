@@ -19,5 +19,5 @@ import org.springframework.stereotype.Component;
 public class CustomProperties {
 
     @NestedConfigurationProperty
-    private TaskProperties taskProperties;
+    private TaskProperties task;
 }

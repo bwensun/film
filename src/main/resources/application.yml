@@ -42,5 +42,5 @@ mybatis-plus:
     banner: false
 
 custom:
-  taskProperties:
+  task:
     syncTimes: 10
