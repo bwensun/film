@@ -40,3 +40,7 @@ mybatis-plus:
     map-underscore-to-camel-case: true
   global-config:
     banner: false
+
+custom:
+  taskProperties:
+    syncTimes: 10

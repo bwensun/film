@@ -1,5 +1,6 @@
 package com.bowensun.film.web;
 
+import com.bowensun.film.common.properties.CustomProperties;
 import com.bowensun.film.domain.UserPO;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -19,6 +20,9 @@ public class TestController {
     @Resource(name = "testUser")
     private UserPO user;
 
+    @Resource
+    private CustomProperties customProperties;
+
     /**
      * 测试EnableConfigurationProperties注解
      *
@@ -26,5 +30,14 @@ public class TestController {
     @RequestMapping("enableConfigurationProperties")
     public void testConfigurationProperties(){
         System.out.println(user);
+    }
+
+    /**
+     * 测试@NestedConfigurationProperty注解
+     *
+     */
+    @RequestMapping("nestedConfigurationProperty")
+    public void testNestedConfigurationProperty(){
+        System.out.println(customProperties.getTaskProperties().getSyncTimes());
     }
 }

@@ -4,5 +4,10 @@
       "name": "redis.expireTime",
       "type": "java.lang.String",
       "description": "Description for redis.expireTime."
-  }
-] }
+    },
+    {
+      "name": "custom.taskProperties.syncTimes",
+      "type": "java.lang.String",
+      "description": "Description for custom.taskProperties.syncTimes."
+    }
+  ] }
