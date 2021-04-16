@@ -135,6 +135,17 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-configuration-processor</artifactId>
         </dependency>
+        <!--spring security-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
+        <!--代码生成的依赖包-->
+        <dependency>
+            <groupId>com.baiwang.customize</groupId>
+            <artifactId>generator</artifactId>
+            <version>2.0.8</version>
+        </dependency>
     </dependencies>
 
     <build>

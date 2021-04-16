@@ -6,7 +6,7 @@ import java.util.Date;
 import lombok.*;
 
 /**
- * 用户对象 user <br/>
+ * 角色对象 role <br/>
  * 数据传输对象 <br/>
  * <b>PageDTO 并不是必须的，为了解耦提供了 IPageParam 接口</b>
  * 
@@ -16,7 +16,7 @@ import lombok.*;
 @ToString(callSuper = true)
 @Getter
 @Setter
-public class UserDTO extends PageDTO implements IPageParam{
+public class RoleDTO extends PageDTO implements IPageParam{
 
 
     /**
@@ -25,14 +25,14 @@ public class UserDTO extends PageDTO implements IPageParam{
     private Long id;
 
     /**
-     * 用户名
+     * 角色名
      */
-    private String username;
+    private String roleName;
 
     /**
-     * 密码
+     * 描述
      */
-    private String password;
+    private String desc;
 
     /**
      * 创建人

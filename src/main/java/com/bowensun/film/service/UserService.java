@@ -1,34 +1,73 @@
 package com.bowensun.film.service;
 
 
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.bowensun.film.domain.UserPO;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.bowensun.film.domain.dto.UserDTO;
 import com.bowensun.film.domain.vo.UserVO;
 
 import java.util.List;
 
 /**
- * 用户service
- *
- * @author bowensun
- * @date 2018/11/9
+ * 用户Service接口
+ * 
+ * @author baiwang
+ * @date 2021-04-16
  */
 public interface UserService {
 
     /**
-     * 用户分页查询
+     * 查询用户
      *
-     * @param user UserDTO
-     * @return PageInfo<UserPO>
+     * @param id 用户ID
+     * @return 用户
      */
-    Page<UserPO> selectPage(UserDTO user);
+     UserVO selectById(Long id);
 
     /**
-     * list查询
+     * 查询用户列表
      *
-     * @param user user
-     * @return List<UserVO>
+     * @param user 用户
+     * @return 用户集合
      */
     List<UserVO> selectList(UserDTO user);
+
+    /**
+     * 分页查询用户列表
+     *
+     * @param user 用户
+     * @return 用户分页对象
+     */
+    IPage<UserVO> selectPaging(UserDTO user);
+
+    /**
+     * 新增用户
+     *
+     * @param user 用户
+     * @return 结果
+     */
+    int insert(UserDTO user);
+
+    /**
+     * 修改用户
+     *
+     * @param user 用户
+     * @return 结果
+     */
+    int update(UserDTO user);
+
+    /**
+     * 批量删除用户
+     *
+     * @param ids 需要删除的用户ID
+     * @return 结果
+     */
+    int deleteByIds(Long[] ids);
+
+    /**
+     * 删除用户信息
+     *
+     * @param id 用户ID
+     * @return 结果
+     */
+    int deleteById(Long id);
 }

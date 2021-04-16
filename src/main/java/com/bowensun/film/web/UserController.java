@@ -1,12 +1,9 @@
 package com.bowensun.film.web;
 
 import com.alibaba.excel.EasyExcel;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.bowensun.film.common.excel.handler.DefaultCellStyleStrategy;
-import com.bowensun.film.common.excel.handler.DefaultColumnWidthStrategy;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.bowensun.film.common.excel.handler.DefaultWriteHandler;
 import com.bowensun.film.common.util.ExcelUtil;
-import com.bowensun.film.domain.UserPO;
 import com.bowensun.film.domain.dto.UserDTO;
 import com.bowensun.film.domain.vo.UserVO;
 import com.bowensun.film.service.UserService;
@@ -36,8 +33,8 @@ public class UserController {
 
     @LogT
     @GetMapping(value = "/page")
-    public Page<UserPO> selectPage(@RequestBody UserDTO user) {
-        return userService.selectPage(user);
+    public IPage<UserVO> selectPage(@RequestBody UserDTO user) {
+        return userService.selectPaging(user);
     }
 
     @LogT
@@ -64,8 +61,6 @@ public class UserController {
     @LogT
     @PostMapping(value = "/templateExport")
     public void templateExport(HttpServletResponse response) throws IOException {
-
     }
-
 
 }
