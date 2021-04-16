@@ -44,3 +44,5 @@ mybatis-plus:
 custom:
   task:
     syncTimes: 10
+  auth:
+    name: '孙博文'

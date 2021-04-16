@@ -20,4 +20,6 @@ public class CustomProperties {
 
     @NestedConfigurationProperty
     private TaskProperties task;
+
+    private AuthProperties auth;
 }

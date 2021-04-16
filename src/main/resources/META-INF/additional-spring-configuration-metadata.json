@@ -9,5 +9,10 @@
       "name": "custom.taskProperties.syncTimes",
       "type": "java.lang.String",
       "description": "Description for custom.taskProperties.syncTimes."
+    },
+    {
+      "name": "custom.auth.name",
+      "type": "java.lang.String",
+      "description": "Description for custom.auth.name."
     }
   ] }
