@@ -11,7 +11,7 @@ spring:
   resources:
     static-locations: classpath:templates,classpath:/META-INF/resources/,classpath:/resources/,classpath:/static/,classpath:/public/
   redis:
-    database: 0
+    database: 1
     password: zyWxznV
     host: 47.103.215.103
     port: 6379
@@ -26,6 +26,11 @@ spring:
     type: redis
   jpa:
     open-in-view: false
+  security:
+    user:
+      name: 'admin'
+      password: 'admin'
+      roles: ADMIN
 
 server:
   port: 9090
@@ -41,8 +46,13 @@ mybatis-plus:
   global-config:
     banner: false
 
+
+############ 自定义配置 ##########
+
 custom:
   task:
     syncTimes: 10
   auth:
     name: '孙博文'
+  captcha:
+    type: 'math'

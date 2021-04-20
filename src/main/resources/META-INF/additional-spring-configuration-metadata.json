@@ -14,5 +14,10 @@
       "name": "custom.auth.name",
       "type": "java.lang.String",
       "description": "Description for custom.auth.name."
+    },
+    {
+      "name": "custom.captcha.type",
+      "type": "java.lang.String",
+      "description": "Description for custom.captcha.type."
     }
   ] }
