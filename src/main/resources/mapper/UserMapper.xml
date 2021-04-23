@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bowensun.film.repository.UserMapper">
+
+	<resultMap type="com.bowensun.film.domain.dto.UserDTO" id="UserDTOResult">
+		<id     property="id"       column="id"      />
+		<result property="username"     column="username"    />
+		<result property="nickname"     column="nickname"    />
+		<result property="email"        column="email"        />
+		<result property="phoneNumber"  column="phone_number"  />
+		<result property="sex"          column="sex"          />
+		<result property="avatar"       column="avatar"       />
+		<result property="password"     column="password"     />
+		<result property="status"       column="status"       />
+		<collection  property="roles"   javaType="java.util.List"        resultMap="RoleResult" />
+	</resultMap>
+	
+	<resultMap id="RoleResult" type="com.bowensun.film.domain.dto.RoleDTO">
+		<id     property="id"       column="role_id"        />
+		<result property="roleName"     column="role_name"      />
+		<result property="desc"     column="desc"    />
+		<result property="status"       column="role_status"    />
+	</resultMap>
+
+	<select id="getUserDtoByUsername" resultMap="UserDTOResult">
+		SELECT
+			u.id,
+			u.username,
+			u.`password`,
+			u.nickname,
+			u.sex,
+			u.email,
+			u.phone_number,
+			u.`status`,
+			u.avatar,
+			r.id as role_id,
+			r.role_name,
+			r.`desc`,
+			r.`status` as role_status
+		FROM
+			user u
+			LEFT JOIN user_role ur ON u.id = ur.user_id
+			LEFT JOIN role r ON ur.role_id = r.id
+		where
+			u.username = #{username}
+	</select>
+</mapper> 

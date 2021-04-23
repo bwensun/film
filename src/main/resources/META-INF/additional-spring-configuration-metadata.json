@@ -1,23 +1,24 @@
 {
   "properties": [
     {
-      "name": "redis.expireTime",
+      "name": "film.captcha.type",
       "type": "java.lang.String",
-      "description": "Description for redis.expireTime."
+      "description": "验证码类型."
     },
     {
-      "name": "custom.taskProperties.syncTimes",
+      "name": "film.jwt.token.expiredTime",
       "type": "java.lang.String",
-      "description": "Description for custom.taskProperties.syncTimes."
+      "description": "jwt.token过期时间."
     },
     {
-      "name": "custom.auth.name",
+      "name": "film.jwt.token.prefix",
       "type": "java.lang.String",
-      "description": "Description for custom.auth.name."
+      "description": "jwt.token前缀.."
     },
     {
-      "name": "custom.captcha.type",
+      "name": "film.jwt.token.refreshInterval",
       "type": "java.lang.String",
-      "description": "Description for custom.captcha.type."
+      "description": "jwt.token刷新间隔."
     }
-  ] }
+  ]
+}

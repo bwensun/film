@@ -1,14 +1,11 @@
 package com.bowensun.film.web;
 
-import com.bowensun.film.common.properties.CustomProperties;
+import com.bowensun.film.common.properties.FilmProperties;
 import com.bowensun.film.domain.UserPO;
-import com.fasterxml.jackson.databind.PropertyNamingStrategy;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import javax.annotation.Resource;
-import java.math.BigDecimal;
-import java.math.RoundingMode;
 
 /**
  * 测试控制器
@@ -23,25 +20,25 @@ public class TestController {
     @Resource(name = "testUser")
     private UserPO user;
 
-    @Resource
-    private CustomProperties customProperties;
 
-    /**
-     * 测试EnableConfigurationProperties注解
-     *
-     */
-    @RequestMapping("enableConfigurationProperties")
-    public void testConfigurationProperties(){
-        System.out.println(user);
+    @RequestMapping("demo")
+    public String demo(){
+        return "demo";
     }
 
-    /**
-     * 测试@NestedConfigurationProperty注解
-     *
-     */
-    @RequestMapping("nestedConfigurationProperty")
-    public void testNestedConfigurationProperty(){
-        System.out.println(customProperties.getTask().getSyncTimes());
-        System.out.println(customProperties.getAuth().getName());
+    @RequestMapping("admin")
+    public String admin(){
+        return "admin";
+    }
+
+    @RequestMapping("normal")
+    public void normal(){
+        System.out.println("normal");
+    }
+
+    @PreAuthorize("@ss.hasPermi('index')")
+    @RequestMapping("testIndexPermi")
+    public String testIndexPermi(){
+        return "testIndexPermi success!";
     }
 }

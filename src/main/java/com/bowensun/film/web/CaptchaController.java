@@ -4,6 +4,7 @@ import cn.hutool.core.codec.Base64;
 import cn.hutool.core.util.IdUtil;
 import com.bowensun.film.common.config.redis.RedisCache;
 import com.bowensun.film.common.constant.BizConstant.*;
+import com.bowensun.film.common.properties.FilmProperties;
 import com.bowensun.film.domain.base.Result;
 import com.bowensun.film.domain.dto.CaptchaImageDTO;
 import com.google.code.kaptcha.Producer;

@@ -35,6 +35,16 @@ public class RoleDTO extends PageDTO implements IPageParam{
     private String desc;
 
     /**
+     * 状态
+     */
+    private Integer status;
+
+    /**
+     * 删除标识
+     */
+    private Integer delFlag;
+
+    /**
      * 创建人
      */
     private String createBy;

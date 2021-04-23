@@ -16,8 +16,7 @@ import lombok.*;
 @Getter
 @Setter
 @TableName("role")
-public class RoleEntity extends BaseEntity {
-
+public class RoleEntity extends BaseEntity<Long> {
 
     /**
      * 主键

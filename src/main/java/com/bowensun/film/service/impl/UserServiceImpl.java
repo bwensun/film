@@ -5,6 +5,7 @@ import com.baiwang.customize.generator.util.DateUtils;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baiwang.customize.generator.util.PageUtils;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.bowensun.film.domain.dto.UserDTO;
 import com.bowensun.film.domain.entity.UserEntity;
 import com.bowensun.film.domain.vo.UserVO;
@@ -24,7 +25,7 @@ import java.util.List;
  * @date 2021-04-16
  */
 @Service
-public class UserServiceImpl implements UserService {
+public class UserServiceImpl extends ServiceImpl<UserMapper, UserEntity> implements UserService {
 
     @Resource
     private UserMapper mapper;
@@ -78,6 +79,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public int deleteById(Long id) {
         return mapper.deleteById(id);
+    }
+
+    @Override
+    public UserDTO getUserDtoByUsername(String username) {
+        return mapper.getUserDtoByUsername(username);
     }
 
     /**

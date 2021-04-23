@@ -11,6 +11,26 @@ package com.bowensun.film.common.constant;
 public final class BizConstant {
 
     /**
+     * UTF-8 字符集
+     */
+    public static final String UTF8 = "UTF-8";
+
+    /**
+     * GBK 字符集
+     */
+    public static final String GBK = "GBK";
+
+    /**
+     * 登录用户ID JWT Claim name
+     */
+    public final static String LOGIN_USER_ID = "login_user_id";
+
+    /**
+     * Redis 登录用户ToekN前缀
+     */
+    public static final String LOGIN_TOKEN_KEY = "login_user:";
+
+    /**
      * Redis验证码前缀
      */
     public static final String CAPTCHA_CODE_KEY = "CPA:";

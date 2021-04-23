@@ -2,7 +2,9 @@ package com.bowensun.film.service;
 
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.service.IService;
 import com.bowensun.film.domain.dto.UserDTO;
+import com.bowensun.film.domain.entity.UserEntity;
 import com.bowensun.film.domain.vo.UserVO;
 
 import java.util.List;
@@ -13,7 +15,7 @@ import java.util.List;
  * @author baiwang
  * @date 2021-04-16
  */
-public interface UserService {
+public interface UserService extends IService<UserEntity> {
 
     /**
      * 查询用户
@@ -70,4 +72,12 @@ public interface UserService {
      * @return 结果
      */
     int deleteById(Long id);
+
+    /**
+     * 根据用户名获取UserDTO
+     *
+     * @param username 用户名
+     * @return UserDTO
+     */
+    UserDTO getUserDtoByUsername(String username);
 }

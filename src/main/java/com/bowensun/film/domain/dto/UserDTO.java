@@ -3,7 +3,11 @@ package com.bowensun.film.domain.dto;
 import com.baiwang.customize.generator.IPageParam;
 import com.baiwang.customize.generator.dto.PageDTO;
 import java.util.Date;
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
+import lombok.experimental.Tolerate;
 
 /**
  * 用户对象 user <br/>
@@ -16,6 +20,7 @@ import lombok.*;
 @ToString(callSuper = true)
 @Getter
 @Setter
+@Builder
 public class UserDTO extends PageDTO implements IPageParam{
 
 
@@ -33,6 +38,36 @@ public class UserDTO extends PageDTO implements IPageParam{
      * 密码
      */
     private String password;
+
+    /**
+     * 昵称
+     */
+    private String nickname;
+
+    /**
+     * 性别
+     */
+    private Integer sex;
+
+    /**
+     * 邮箱
+     */
+    private String email;
+
+    /**
+     * 电话号码
+     */
+    private String phoneNumber;
+
+    /**
+     * 用户状态
+     */
+    private Integer status;
+
+    /**
+     * 头像地址
+     */
+    private String avatar;
 
     /**
      * 创建人
@@ -54,4 +89,17 @@ public class UserDTO extends PageDTO implements IPageParam{
      */
     private Date updateTime;
 
+    /**
+     * 角色集合
+     */
+    private List<RoleDTO> roles;
+
+    @Tolerate
+    public UserDTO() {
+    }
+
+    @JsonIgnore
+    public boolean isAdmin() {
+        return this.id == 1;
+    }
 }

@@ -26,11 +26,6 @@ spring:
     type: redis
   jpa:
     open-in-view: false
-  security:
-    user:
-      name: 'admin'
-      password: 'admin'
-      roles: ADMIN
 
 server:
   port: 9090
@@ -49,10 +44,17 @@ mybatis-plus:
 
 ############ 自定义配置 ##########
 
-custom:
-  task:
-    syncTimes: 10
-  auth:
-    name: '孙博文'
+film:
   captcha:
     type: 'math'
+  jwt:
+    token:
+      # 前缀
+      prefix: 'Bearer'
+      # 签发人
+      issuer: 'bwensun'
+      expiredTime: 30
+      subject: 'film'
+      audience: 'fans'
+      secret: 'tingzheng'
+      refreshInterval: 20

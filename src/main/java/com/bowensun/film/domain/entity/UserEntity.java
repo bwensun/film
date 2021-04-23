@@ -1,8 +1,9 @@
 package com.bowensun.film.domain.entity;
 
 import com.baiwang.customize.generator.entity.BaseEntity;
-import java.util.Date;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 /**
@@ -16,7 +17,7 @@ import lombok.*;
 @Getter
 @Setter
 @TableName("user")
-public class UserEntity extends BaseEntity {
+public class UserEntity extends BaseEntity<Long> {
 
 
     /**
@@ -33,4 +34,41 @@ public class UserEntity extends BaseEntity {
      * 密码
      */
     private String password;
+
+    /**
+     * 昵称
+     */
+    private String nickname;
+
+    /**
+     * 性别
+     */
+    private Integer sex;
+
+    /**
+     * 邮箱
+     */
+    private String email;
+
+    /**
+     * 电话号码
+     */
+    private String phoneNumber;
+
+    /**
+     * 用户状态
+     */
+    private Integer status;
+
+    /**
+     * 头像地址
+     */
+    private String avatar;
+
+    /**
+     * 为了去除备注字段
+     */
+    @TableField(exist = false)
+    private String remark;
+
 }
