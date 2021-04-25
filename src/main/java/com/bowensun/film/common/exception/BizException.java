@@ -1,5 +1,6 @@
 package com.bowensun.film.common.exception;
 
+import com.bowensun.film.common.constant.ExceptionEnum;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.ToString;
@@ -29,5 +30,12 @@ public class BizException extends RuntimeException {
      */
     public static BizException of(String code, String message) {
         return new BizException(code, message);
+    }
+
+    /**
+     * 通过异常枚举构建业务异常
+     */
+    public static BizException of(ExceptionEnum exception) {
+        return new BizException(exception.code, exception.message);
     }
 }

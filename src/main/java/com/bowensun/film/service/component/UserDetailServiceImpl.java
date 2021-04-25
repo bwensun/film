@@ -1,6 +1,7 @@
 package com.bowensun.film.service.component;
 
 import com.bowensun.film.common.constant.BizConstant;
+import com.bowensun.film.common.constant.ExceptionEnum;
 import com.bowensun.film.common.exception.BizException;
 import com.bowensun.film.domain.LoginUser;
 import com.bowensun.film.domain.dto.UserDTO;
@@ -35,14 +36,13 @@ public class UserDetailServiceImpl implements UserDetailsService {
         UserDTO user = userService.getUserDtoByUsername(username);
         if (Objects.isNull(user)) {
             log.info("登录用户：{}，不存在", username);
-            //TODO: 维护异常枚举
-            throw BizException.of("-1", "用户不存在");
+            throw BizException.of(ExceptionEnum.USER_NOT_EXIST);
         } else if (user.getStatus() == BizConstant.UserStatus.FROZEN) {
             log.info("登录用户：{}，已冻结", username);
-            throw BizException.of("-1", "用户已冻结");
+            throw BizException.of(ExceptionEnum.USER_FROZEN);
         } else if (user.getStatus() == BizConstant.UserStatus.DELETED) {
             log.info("登录用户：{}，已删除", username);
-            throw BizException.of("-1", "用户已删除");
+            throw BizException.of(ExceptionEnum.USER_DELETED);
         }
         return new LoginUser(user, permissionService.getResource(user));
     }

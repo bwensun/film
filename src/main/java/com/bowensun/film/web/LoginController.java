@@ -1,5 +1,6 @@
 package com.bowensun.film.web;
 
+import com.bowensun.film.common.annotation.LogT;
 import com.bowensun.film.domain.base.Result;
 import com.bowensun.film.service.LoginService;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,6 +19,7 @@ public class LoginController {
     @Resource
     private LoginService loginService;
 
+    @LogT(functionName = "用户登录")
     @RequestMapping("login")
     public Result<String> login(String username, String password){
         String token = loginService.login(username, password);

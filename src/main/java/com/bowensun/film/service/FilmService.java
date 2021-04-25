@@ -13,6 +13,7 @@ import com.bowensun.film.domain.vo.FilmVo;
  * @date 2021/4/24
  */
 public interface FilmService extends IService<FilmEntity> {
+
     /**
      * 电影分页
      *
