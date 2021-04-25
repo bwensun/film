@@ -50,7 +50,7 @@ public class TokenService {
     public void setUserAgent(LoginUser loginUser) {
         UserAgent userAgent = UserAgent.parseUserAgentString(ServletUtils.getRequest().getHeader("User-Agent"));
         String ip = IpUtils.getIpAddr(ServletUtils.getRequest());
-        loginUser.setIpaddr(ip);
+        loginUser.setIpAddr(ip);
         loginUser.setLoginLocation(AddressUtils.getRealAddressByIP(ip));
         loginUser.setBrowser(userAgent.getBrowser().getName());
         loginUser.setOs(userAgent.getOperatingSystem().getName());
@@ -70,14 +70,12 @@ public class TokenService {
         }
     }
 
-    public void cacheToken(LoginUser loginUser) {
-        loginUser.setLoginTime(System.currentTimeMillis());
-        loginUser.setExpireTime(loginUser.getLoginTime() + jwtTokenProperties.getExpiredTime() * MILLIS_MINUTE);
-        // 根据 uuid 将 loginUser 缓存
-        String userKey = getTokenKey(loginUser.getUser().getId());
-        redisCache.setCacheObject(userKey, loginUser, jwtTokenProperties.getExpiredTime(), TimeUnit.MINUTES);
-    }
-
+    /**
+     * 获取当前登录用户
+     *
+     * @param request 当前请求对象
+     * @return 登录用户
+     */
     public LoginUser getLoginUser(HttpServletRequest request){
         String header = request.getHeader(HttpHeaders.AUTHORIZATION);
         String prefix = jwtTokenProperties.getPrefix();
@@ -90,10 +88,25 @@ public class TokenService {
         return null;
     }
 
+    /**
+     * 删除Redis中缓存的登录信息
+     *
+     * @param userId 用户主键
+     */
+    public void delLoginUser(Long userId) {
+        String tokenKey = getTokenKey(userId);
+        redisCache.deleteObject(tokenKey);
+    }
+
+    private void cacheToken(LoginUser loginUser) {
+        loginUser.setLoginTime(System.currentTimeMillis());
+        loginUser.setExpireTime(loginUser.getLoginTime() + jwtTokenProperties.getExpiredTime() * MILLIS_MINUTE);
+        // 根据 uuid 将 loginUser 缓存
+        String userKey = getTokenKey(loginUser.getUser().getId());
+        redisCache.setCacheObject(userKey, loginUser, jwtTokenProperties.getExpiredTime(), TimeUnit.MINUTES);
+    }
+
     private String getTokenKey(Long userId) {
         return BizConstant.LOGIN_TOKEN_KEY + userId;
     }
-
-
-
 }

@@ -1,8 +1,8 @@
 package com.bowensun.film.service.impl;
 
-import com.bowensun.film.common.config.redis.RedisCache;
 import com.bowensun.film.common.exception.BizException;
 import com.bowensun.film.domain.LoginUser;
+import com.bowensun.film.service.LoginInfoService;
 import com.bowensun.film.service.LoginService;
 import com.bowensun.film.service.component.TokenService;
 import lombok.extern.slf4j.Slf4j;
@@ -12,6 +12,8 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
+
+import static com.bowensun.film.common.constant.ExceptionEnum.*;
 
 /**
  * 登录服务实现
@@ -24,13 +26,13 @@ import javax.annotation.Resource;
 public class LoginServiceImpl implements LoginService {
 
     @Resource
-    private RedisCache redisCache;
-
-    @Resource
     private AuthenticationManager authenticationManager;
 
     @Resource
     private TokenService tokenService;
+
+    @Resource
+    private LoginInfoService loginInfoService;
 
     @Override
     public String login(String username, String password){
@@ -40,10 +42,10 @@ public class LoginServiceImpl implements LoginService {
         }catch (Exception e){
             if (e instanceof BadCredentialsException){
                 log.info("用户：{} 认证失败", username);
-                //TODO: 异步插入日志表
-                throw BizException.of("-1", "用户名或密码错误");
+                throw BizException.of(USER_PASSWORD_NOT_MATCH);
+                //TODO 异步处理 记录日志
             }else {
-                throw BizException.of("-1", e.getMessage());
+                throw BizException.of(INTERNAL_ERROR);
             }
         }
         LoginUser loginUser = (LoginUser) authentication.getPrincipal();

@@ -25,4 +25,10 @@ public class LoginController {
         String token = loginService.login(username, password);
         return  Result.success(token);
     }
+
+    @LogT(functionName = "用户退出")
+    @RequestMapping("logout")
+    public Result<String> logout(){
+        return  Result.success("用户退出成功");
+    }
 }

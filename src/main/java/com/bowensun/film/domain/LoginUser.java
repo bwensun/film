@@ -26,6 +26,11 @@ import java.util.Set;
 public class LoginUser implements UserDetails {
 
     /**
+     * 用户名
+     */
+    private String username;
+
+    /**
      * 登录时间
      */
     private Long loginTime;
@@ -38,7 +43,7 @@ public class LoginUser implements UserDetails {
     /**
      * 登录IP地址
      */
-    private String ipaddr;
+    private String ipAddr;
 
     /**
      * 登录地点
@@ -71,6 +76,7 @@ public class LoginUser implements UserDetails {
     }
 
     @Override
+    @JsonIgnore
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return null;
     }

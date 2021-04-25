@@ -81,4 +81,20 @@ public final class BizConstant {
          */
         public static final String CHAR = "char";
     }
+
+    /**
+     * 登录状态
+     */
+    public static final class LoginStatus{
+
+        /**
+         * 离线
+         */
+        public static final int OFFLINE = 0;
+
+        /**
+         * 在线
+         */
+        public static final int ONLINE = 1;
+    }
 }
