@@ -18,30 +18,33 @@ public class Result<T> {
      */
     public String message;
 
+    public int code;
+
     /**
      * 返回对象
      */
     public T data;
 
-    private Result(boolean success, String message, T data) {
+    private Result(boolean success, int code, String message, T data) {
         this.success = success;
         this.message = message;
         this.data = data;
+        this.code = code;
     }
 
     public static Result<?> success() {
-        return new Result<>(true, "ok", null);
+        return new Result<>(true, 200, "ok", null);
     }
 
     public static<T> Result<T> success(T data) {
-        return new Result<>(true, "ok", data);
+        return new Result<>(true, 200,"ok", data);
     }
 
     public static Result<?> error(String message) {
-        return new Result<>(false, message, null);
+        return new Result<>(false, 500, message, null);
     }
 
-    public static<T> Result<T> error(String message, T data) {
-        return new Result<>(false, message, data);
+    public static Result<?> error(String message, int code) {
+        return new Result<>(false, code, message, null);
     }
 }
