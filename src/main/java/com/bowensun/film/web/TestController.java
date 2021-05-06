@@ -1,11 +1,8 @@
 package com.bowensun.film.web;
 
-import com.bowensun.film.common.properties.FilmProperties;
-import com.bowensun.film.domain.UserPO;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import javax.annotation.Resource;
 
 /**
  * 测试控制器
@@ -16,10 +13,6 @@ import javax.annotation.Resource;
 @RequestMapping("test")
 @RestController
 public class TestController {
-
-    @Resource(name = "testUser")
-    private UserPO user;
-
 
     @RequestMapping("demo")
     public String demo(){
