@@ -2,7 +2,9 @@ package com.bowensun.film.web;
 
 import com.bowensun.film.common.annotation.LogT;
 import com.bowensun.film.domain.base.Result;
+import com.bowensun.film.domain.dto.LoginDTO;
 import com.bowensun.film.service.LoginService;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import javax.annotation.Resource;
@@ -21,8 +23,8 @@ public class LoginController {
 
     @LogT(functionName = "用户登录")
     @RequestMapping("login")
-    public Result<String> login(String username, String password){
-        String token = loginService.login(username, password);
+    public Result<String> login(@RequestBody LoginDTO login){
+        String token = loginService.login(login.getUsername(), login.getPassword());
         return  Result.success(token);
     }
 
