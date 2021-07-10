@@ -44,4 +44,9 @@ public class FilmVo {
      * 封面海报地址
      */
     private String cover;
+
+    /**
+     * 介绍
+     */
+    private String introduction;
 }

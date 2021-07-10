@@ -46,6 +46,11 @@ public class FilmEntity {
     private String cover;
 
     /**
+     * 介绍
+     */
+    private String introduction;
+
+    /**
      * 创建人
      */
     private String createBy;

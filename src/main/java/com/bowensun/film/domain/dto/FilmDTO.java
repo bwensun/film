@@ -53,6 +53,11 @@ public class FilmDTO extends PageDTO implements IPageParam {
     private String cover;
 
     /**
+     * 介绍
+     */
+    private String introduction;
+
+    /**
      * 创建人
      */
     private String createBy;
