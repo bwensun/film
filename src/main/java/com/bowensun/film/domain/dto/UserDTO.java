@@ -55,6 +55,16 @@ public class UserDTO extends PageDTO implements IPageParam{
     private String email;
 
     /**
+     * 等级
+     */
+    private Integer level;
+
+    /**
+     * 活跃度
+     */
+    private Long activity;
+
+    /**
      * 电话号码
      */
     private String phoneNumber;

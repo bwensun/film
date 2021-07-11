@@ -80,4 +80,12 @@ public interface UserService extends IService<UserEntity> {
      * @return UserDTO
      */
     UserDTO getUserDtoByUsername(String username);
+
+    /**
+     * 用户活跃度调整
+     *
+     * @param userId 用户主键
+     * @param delta 偏移量
+     */
+    void activityAdjust(Long userId, double delta);
 }

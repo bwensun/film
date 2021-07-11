@@ -208,6 +208,53 @@ public class RedisCache {
     }
 
     /**
+     * 存入指定key的sortSet
+     *
+     * @param key Redis键
+     * @param value 对象
+     * @param score 排序值
+     * @return 存入结果
+     */
+    public boolean setSortObject(final String key, final Object value, final double score) {
+        return redisTemplate.opsForZSet().add(key, value, score);
+    }
+
+    /**
+     * 获取指定key指定value的score值
+     *
+     * @param key   Redis键
+     * @param value 存入的值
+     * @return score
+     */
+    public Double score(final String key, final Object value) {
+        return redisTemplate.opsForZSet().score(key, value);
+    }
+
+    /**
+     * 变更指定key指定value的score值
+     *
+     * @param key   Redis键
+     * @param value 存入的值
+     * @param delta 偏移量
+     * @return 变更后的score
+     */
+    public Double incrementScore(final String key, final Object value, final double delta) {
+        return redisTemplate.opsForZSet().incrementScore(key, value, delta);
+    }
+
+    /**
+     * 获取指定score范围指定key的set集合
+     *
+     * @param key   Redis键
+     * @param min score最小值
+     * @param max score最大值
+     * @return 满足条件的set集合
+     */
+    public <T> Set<T> getSortObject(final String key, final double min, final double max) {
+        return redisTemplate.opsForZSet().rangeByScore(key, min, max);
+    }
+
+    /**
      * 获得缓存的基本对象列表
      *
      * @param pattern 字符串前缀

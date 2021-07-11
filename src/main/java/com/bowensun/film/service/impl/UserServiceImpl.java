@@ -6,17 +6,22 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baiwang.customize.generator.util.PageUtils;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.bowensun.film.common.config.redis.RedisCache;
+import com.bowensun.film.common.constant.BizConstant;
 import com.bowensun.film.domain.dto.UserDTO;
 import com.bowensun.film.domain.entity.UserEntity;
 import com.bowensun.film.domain.vo.UserVO;
 import com.bowensun.film.repository.UserMapper;
 import com.bowensun.film.service.UserService;
 import com.bowensun.film.service.mapstruct.UserConverter;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
+import java.util.concurrent.TimeUnit;
 
 /**
  * 用户Service业务层处理
@@ -25,6 +30,7 @@ import java.util.List;
  * @date 2021-04-16
  */
 @Service
+@Slf4j
 public class UserServiceImpl extends ServiceImpl<UserMapper, UserEntity> implements UserService {
 
     @Resource
@@ -32,6 +38,9 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserEntity> impleme
 
     @Resource
     private UserConverter converter;
+    
+    @Resource
+    private RedisCache redisCache;
 
     /**
      * 查询用户
@@ -84,6 +93,17 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserEntity> impleme
     @Override
     public UserDTO getUserDtoByUsername(String username) {
         return mapper.getUserDtoByUsername(username);
+    }
+
+    @Override
+    public void activityAdjust(Long userId, double delta) {
+        String key = BizConstant.ACTIVITY_RANK_KEY;
+        Double score = redisCache.score(key, userId);
+        if (Objects.isNull(score)){
+            redisCache.setSortObject(key, userId, 0);
+        }else {
+            redisCache.incrementScore(key, userId, delta);
+        }
     }
 
     /**

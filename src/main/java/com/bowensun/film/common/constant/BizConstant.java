@@ -33,7 +33,12 @@ public final class BizConstant {
     /**
      * Redis验证码前缀
      */
-    public static final String CAPTCHA_CODE_KEY = "CPA:";
+    public static final String CAPTCHA_CODE_KEY = "captcha:";
+
+    /**
+     * 用户活跃度
+     */
+    public static final String ACTIVITY_RANK_KEY = "activity_rank:";
 
     /**
      * 缓存过期时间 分钟
@@ -97,4 +102,6 @@ public final class BizConstant {
          */
         public static final int ONLINE = 1;
     }
+
+
 }
