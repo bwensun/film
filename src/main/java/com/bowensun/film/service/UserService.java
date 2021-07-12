@@ -88,4 +88,12 @@ public interface UserService extends IService<UserEntity> {
      * @param delta 偏移量
      */
     void activityAdjust(Long userId, double delta);
+
+    /**
+     * 用户活跃度排行
+     *
+     * @param count 前几名
+     * @return 用户信息
+     */
+    List<UserVO> activityRank(Integer count);
 }

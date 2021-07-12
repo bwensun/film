@@ -1,10 +1,7 @@
 package com.bowensun.film.common.config.redis;
 
 
-import org.springframework.data.redis.core.HashOperations;
-import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.core.StringRedisTemplate;
-import org.springframework.data.redis.core.ValueOperations;
+import org.springframework.data.redis.core.*;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
@@ -220,6 +217,17 @@ public class RedisCache {
     }
 
     /**
+     * 存入指定key的sortSet
+     *
+     * @param key Redis键
+     * @param tupleSet set集合
+     * @return 存入数量
+     */
+    public Long setSortObject(final String key, final Set<ZSetOperations.TypedTuple<Object>> tupleSet) {
+        return redisTemplate.opsForZSet().add(key, tupleSet);
+    }
+
+    /**
      * 获取指定key指定value的score值
      *
      * @param key   Redis键
@@ -250,8 +258,56 @@ public class RedisCache {
      * @param max score最大值
      * @return 满足条件的set集合
      */
-    public <T> Set<T> getSortObject(final String key, final double min, final double max) {
+    public <T> Set<T> rangeByScore(final String key, final double min, final double max) {
         return redisTemplate.opsForZSet().rangeByScore(key, min, max);
+    }
+
+    /**
+     * 获取指定key的score排行前几名的value的set集合
+     *
+     * @param key   Redis键
+     * @param offset 起始值
+     * @param count 总数
+     * @return 满足条件的set集合
+     */
+    public <T> Set<T> revRange(final String key, final long offset, final long count) {
+        return redisTemplate.opsForZSet().reverseRange(key, offset, count);
+    }
+
+    /**
+     * 获取指定key的score排行前几名的value 和 score 的set集合
+     *
+     * @param key   Redis键
+     * @param offset 起始值
+     * @param count 总数
+     * @return 满足条件的set集合
+     */
+    public <T> Set<T> revRangeWithScores(final String key, final long offset, final long count) {
+        return redisTemplate.opsForZSet().reverseRangeWithScores(key, offset, count);
+    }
+
+    /**
+     * 获取指定key的score排行前几名的set集合 带上score
+     *
+     * @param key   Redis键
+     * @param offset 起始值
+     * @param count 总数
+     * @return 满足条件的set集合
+     */
+    public <T> Set<T> revRangeByScore(final String key, final long offset, final long count) {
+        return redisTemplate.opsForZSet().reverseRangeByScore(key, 0, -1, offset, count);
+    }
+
+    /**
+     * 获取指定key的score排行前几名的set集合 带上score
+     *
+     * @param key   Redis键
+     * @param min score最小值
+     * @param max top
+     * @return 满足条件的set集合
+     */
+    public <T> Set<T> revRangeByScore(final String key, final long offset, final long count, final double min, final double max) {
+        return redisTemplate.opsForZSet().reverseRangeByScore(key, min, max, offset, count);
     }
 
     /**

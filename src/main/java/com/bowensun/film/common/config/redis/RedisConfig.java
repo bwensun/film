@@ -38,15 +38,4 @@ public class RedisConfig extends CachingConfigurerSupport {
         redisTemplate.afterPropertiesSet();
         return redisTemplate;
     }
-
-
-//    private GenericJackson2JsonRedisSerializer defaultJacksonRedisSerializer(){
-//        GenericJackson2JsonRedisSerializer serializer = new GenericJackson2JsonRedisSerializer();
-//        serializer.
-//        ObjectMapper om = new ObjectMapper();
-//        om.setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.ANY);
-//        om.enableDefaultTyping(ObjectMapper.DefaultTyping.NON_FINAL);
-//        serializer.se
-//        return serializer;
-//    }
 }

@@ -1,5 +1,6 @@
 package com.bowensun.film.service.impl;
 
+import cn.hutool.core.collection.CollectionUtil;
 import com.baiwang.customize.generator.util.WrapperUtils;
 import com.baiwang.customize.generator.util.DateUtils;
 import com.baomidou.mybatisplus.core.metadata.IPage;
@@ -18,9 +19,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Objects;
+import javax.swing.text.html.Option;
+import java.util.*;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -38,7 +38,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserEntity> impleme
 
     @Resource
     private UserConverter converter;
-    
+
     @Resource
     private RedisCache redisCache;
 
@@ -99,21 +99,35 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserEntity> impleme
     public void activityAdjust(Long userId, double delta) {
         String key = BizConstant.ACTIVITY_RANK_KEY;
         Double score = redisCache.score(key, userId);
-        if (Objects.isNull(score)){
+        if (Objects.isNull(score)) {
             redisCache.setSortObject(key, userId, 0);
-        }else {
+        } else {
             redisCache.incrementScore(key, userId, delta);
         }
     }
 
+    @Override
+    public List<UserVO> activityRank(Integer count) {
+        Set<Integer> userIdSet = redisCache.revRange(BizConstant.ACTIVITY_RANK_KEY, 0, count - 1);
+        List<UserVO> userVOList = new ArrayList<>();
+        if (CollectionUtil.isNotEmpty(userIdSet)) {
+            userIdSet.forEach(id -> {
+                UserVO userVO = this.selectById(id.longValue());
+                userVOList.add(userVO);
+            });
+        }
+        return userVOList;
+    }
+
     /**
      * 查询语句构造器
+     *
      * @param dto 数据传输对象
      * @return 返回一个查询构造器
      */
     private QueryWrapper<UserEntity> getQueryWrapper(UserDTO dto) {
         return WrapperUtils.<UserEntity>of()
-            .like("username", dto.getUsername())
-            .end();
+                .like("username", dto.getUsername())
+                .end();
     }
 }

@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.bowensun.film.common.annotation.LogT;
 import com.bowensun.film.common.excel.handler.DefaultWriteHandler;
 import com.bowensun.film.common.util.ExcelUtil;
+import com.bowensun.film.domain.base.Result;
 import com.bowensun.film.domain.dto.UserDTO;
 import com.bowensun.film.domain.vo.UserVO;
 import com.bowensun.film.service.UserService;
@@ -53,5 +54,12 @@ public class UserController {
                 .sheet("用户列表")
                 .registerWriteHandler(new DefaultWriteHandler())
                 .doWrite(userVOList);
+    }
+
+    @GetMapping("activity/rank")
+    @LogT(functionName = "用户活跃度排行查询")
+    public Result<List<UserVO>> activityRank(Integer count){
+        List<UserVO> data = userService.activityRank(count);
+        return Result.success(data);
     }
 }

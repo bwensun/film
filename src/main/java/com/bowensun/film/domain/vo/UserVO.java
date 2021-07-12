@@ -17,6 +17,11 @@ import lombok.*;
 public class UserVO extends ExcelIndex{
 
     /**
+     * 主键
+     */
+    private Long id;
+
+    /**
      * 用户名
      */
     @ExcelProperty(value = "用户名", index = 1)
