@@ -15,11 +15,15 @@ public enum ExceptionType {
      */
     BIZ_EXCEPTION("业务异常"),
 
-
     /**
      * 认证异常
      */
     AUTH_EXCEPTION("认证异常"),
+
+    /**
+     * 参数校验异常
+     */
+    PARAM_VALIDATE_EXCEPTION("参数校验异常"),
 
     /**
      * 其他异常

@@ -41,6 +41,11 @@ public final class BizConstant {
     public static final String ACTIVITY_RANK_KEY = "activity_rank:";
 
     /**
+     * 字典前缀
+     */
+    public static final String DICT_KEY = "dict:";
+
+    /**
      * 缓存过期时间 分钟
      */
     public static int CAPTCHA_EXPIRATION = 1;

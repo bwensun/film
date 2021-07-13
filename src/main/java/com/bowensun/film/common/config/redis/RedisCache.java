@@ -5,10 +5,8 @@ import org.springframework.data.redis.core.*;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.nio.charset.StandardCharsets;
+import java.util.*;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -17,7 +15,7 @@ import java.util.concurrent.TimeUnit;
  * @author 郑建雄
  * @date 2019/5/15
  */
-@SuppressWarnings({"rawtypes", "unchecked", "unused", "ConstantConditions"})
+@SuppressWarnings({"rawtypes", "unchecked", "unused", "ConstantConditions", "UnusedReturnValue"})
 @Component
 public class RedisCache {
 
@@ -205,9 +203,21 @@ public class RedisCache {
     }
 
     /**
+     * 获取多个Hash中的数据
+     *
+     * @param scanOptions Hash键集合
+     * @param key   Redis键
+     * @return Hash对象集合
+     */
+    public <T> Cursor getMultiCacheMapValue(final String key, final ScanOptions scanOptions) {
+        Cursor scan = redisTemplate.opsForHash().scan(key, scanOptions);
+        return redisTemplate.opsForHash().scan(key, scanOptions);
+    }
+
+    /**
      * 存入指定key的sortSet
      *
-     * @param key Redis键
+     * @param key   Redis键
      * @param value 对象
      * @param score 排序值
      * @return 存入结果
@@ -219,7 +229,7 @@ public class RedisCache {
     /**
      * 存入指定key的sortSet
      *
-     * @param key Redis键
+     * @param key      Redis键
      * @param tupleSet set集合
      * @return 存入数量
      */
@@ -253,7 +263,7 @@ public class RedisCache {
     /**
      * 获取指定score范围指定key的set集合
      *
-     * @param key   Redis键
+     * @param key Redis键
      * @param min score最小值
      * @param max score最大值
      * @return 满足条件的set集合
@@ -265,9 +275,9 @@ public class RedisCache {
     /**
      * 获取指定key的score排行前几名的value的set集合
      *
-     * @param key   Redis键
+     * @param key    Redis键
      * @param offset 起始值
-     * @param count 总数
+     * @param count  总数
      * @return 满足条件的set集合
      */
     public <T> Set<T> revRange(final String key, final long offset, final long count) {
@@ -277,9 +287,9 @@ public class RedisCache {
     /**
      * 获取指定key的score排行前几名的value 和 score 的set集合
      *
-     * @param key   Redis键
+     * @param key    Redis键
      * @param offset 起始值
-     * @param count 总数
+     * @param count  总数
      * @return 满足条件的set集合
      */
     public <T> Set<T> revRangeWithScores(final String key, final long offset, final long count) {
@@ -289,9 +299,9 @@ public class RedisCache {
     /**
      * 获取指定key的score排行前几名的set集合 带上score
      *
-     * @param key   Redis键
+     * @param key    Redis键
      * @param offset 起始值
-     * @param count 总数
+     * @param count  总数
      * @return 满足条件的set集合
      */
     public <T> Set<T> revRangeByScore(final String key, final long offset, final long count) {
@@ -301,14 +311,16 @@ public class RedisCache {
     /**
      * 获取指定key的score排行前几名的set集合 带上score
      *
-     * @param key   Redis键
+     * @param key Redis键
      * @param min score最小值
      * @param max top
      * @return 满足条件的set集合
      */
     public <T> Set<T> revRangeByScore(final String key, final long offset, final long count, final double min, final double max) {
         return redisTemplate.opsForZSet().reverseRangeByScore(key, min, max, offset, count);
+
     }
+
 
     /**
      * 获得缓存的基本对象列表
@@ -318,5 +330,27 @@ public class RedisCache {
      */
     public Collection<String> keys(final String pattern) {
         return redisTemplate.keys(pattern);
+    }
+
+    /**
+     * scan获取满足条件的key
+     * 不同于keys
+     * scan是由limit的且安全的
+     *
+     * @param pattern 匹配规则
+     * @param count 数量
+     * @return 满足条件的key
+     */
+    public Set<String> scan(String pattern, long count) {
+        return (Set<String>) redisTemplate.execute((RedisCallback<Set<String>>) connection -> {
+            Set<String> keysTmp = new HashSet<>();
+            Cursor<byte[]> cursor = connection.scan(new ScanOptions.ScanOptionsBuilder()
+                    .match(pattern)
+                    .count(count).build());
+            while (cursor.hasNext()) {
+                keysTmp.add(new String(cursor.next(), StandardCharsets.UTF_8));
+            }
+            return keysTmp;
+        });
     }
 }
