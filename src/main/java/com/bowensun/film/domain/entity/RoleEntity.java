@@ -1,8 +1,7 @@
 package com.bowensun.film.domain.entity;
 
-import com.baiwang.customize.generator.entity.BaseEntity;
-import java.util.Date;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.bowensun.film.domain.base.BaseEntity;
 import lombok.*;
 
 /**
@@ -16,7 +15,7 @@ import lombok.*;
 @Getter
 @Setter
 @TableName("role")
-public class RoleEntity extends BaseEntity<Long> {
+public class RoleEntity extends BaseEntity {
 
     /**
      * 主键

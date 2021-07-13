@@ -6,11 +6,13 @@ package com.bowensun.film.common.constant;
  * @author 郑建雄
  * @date 2021/4/25
  */
-
+@SuppressWarnings("unused")
 public enum ExceptionEnum {
 
     /* HTTP状态码 */
     INTERNAL_ERROR("500", "内部服务器错误"),
+
+    AUTH_EXCEPTION("401", "认证异常"),
 
     /**
      * 用户不存在
@@ -31,10 +33,6 @@ public enum ExceptionEnum {
      * 用户名或密码错误
      */
     USER_PASSWORD_NOT_MATCH("1004", "用户名或密码错误"),
-
-
-
-
     ;
 
     public final String code;

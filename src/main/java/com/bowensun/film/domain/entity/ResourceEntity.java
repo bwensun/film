@@ -1,7 +1,7 @@
 package com.bowensun.film.domain.entity;
 
-import com.baiwang.customize.generator.entity.BaseEntity;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.bowensun.film.domain.base.BaseEntity;
 import lombok.*;
 
 /**
@@ -11,11 +11,11 @@ import lombok.*;
  * @author baiwang
  * @date 2021-04-21
  */
-@ToString(callSuper = true)
+@ToString
 @Getter
 @Setter
 @TableName("resource")
-public class ResourceEntity extends BaseEntity<Long> {
+public class ResourceEntity extends BaseEntity {
 
 
     /**
@@ -72,9 +72,4 @@ public class ResourceEntity extends BaseEntity<Long> {
      * 菜单图标
      */
     private String icon;
-
-    /**
-     * 备注
-     */
-    private String remark;
 }

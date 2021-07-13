@@ -1,19 +1,18 @@
 package com.bowensun.film.service.impl;
 
-import com.bowensun.film.common.exception.BizException;
 import com.bowensun.film.domain.LoginUser;
-import com.bowensun.film.service.LoginInfoService;
+import com.bowensun.film.domain.dto.UserDTO;
 import com.bowensun.film.service.LoginService;
+import com.bowensun.film.service.UserService;
 import com.bowensun.film.service.component.TokenService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.InternalAuthenticationServiceException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
-
-import static com.bowensun.film.common.constant.ExceptionEnum.*;
 
 /**
  * 登录服务实现
@@ -32,7 +31,7 @@ public class LoginServiceImpl implements LoginService {
     private TokenService tokenService;
 
     @Resource
-    private LoginInfoService loginInfoService;
+    private UserService userService;
 
     @Override
     public String login(String username, String password){
@@ -40,15 +39,24 @@ public class LoginServiceImpl implements LoginService {
         try {
             authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
         }catch (Exception e){
-            if (e instanceof BadCredentialsException){
+            if (e instanceof InternalAuthenticationServiceException){
                 log.info("用户：{} 认证失败", username);
-                throw BizException.of(USER_PASSWORD_NOT_MATCH);
                 //TODO 异步处理 记录日志
-            }else {
-                throw BizException.of(INTERNAL_ERROR);
             }
+            throw e;
         }
         LoginUser loginUser = (LoginUser) authentication.getPrincipal();
         return tokenService.createToken(loginUser);
+    }
+
+    @Override
+    public void register(UserDTO user) {
+        reEncrypt(user);
+        userService.insert(user);
+    }
+
+    private void reEncrypt(UserDTO user) {
+        String encode = new BCryptPasswordEncoder().encode(user.getPassword());
+        user.setPassword(encode);
     }
 }

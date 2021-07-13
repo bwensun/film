@@ -17,6 +17,11 @@ public enum ExceptionType {
 
 
     /**
+     * 认证异常
+     */
+    AUTH_EXCEPTION("认证异常"),
+
+    /**
      * 其他异常
      */
     OTHER_EXCEPTION("其他异常"),

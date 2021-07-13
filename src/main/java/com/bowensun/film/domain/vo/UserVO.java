@@ -40,6 +40,16 @@ public class UserVO extends ExcelIndex{
     private String nickname;
 
     /**
+     * 等级
+     */
+    private Integer level;
+
+    /**
+     * 活跃度
+     */
+    private Long activity;
+
+    /**
      * 性别
      */
     private Integer sex;

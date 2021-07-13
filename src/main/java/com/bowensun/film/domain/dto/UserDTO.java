@@ -9,6 +9,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import lombok.experimental.Tolerate;
 
+import javax.validation.constraints.NotEmpty;
+
 /**
  * 用户对象 user <br/>
  * 数据传输对象 <br/>
@@ -32,16 +34,19 @@ public class UserDTO extends PageDTO implements IPageParam{
     /**
      * 用户名
      */
+    @NotEmpty(message = "用户名不能为空", groups = Insert.class)
     private String username;
 
     /**
      * 密码
      */
+    @NotEmpty(message = "密码不能为空", groups = Insert.class)
     private String password;
 
     /**
      * 昵称
      */
+    @NotEmpty(message = "昵称不能为空", groups = Insert.class)
     private String nickname;
 
     /**
@@ -52,6 +57,7 @@ public class UserDTO extends PageDTO implements IPageParam{
     /**
      * 邮箱
      */
+    @NotEmpty(message = "邮箱不能为空", groups = Insert.class)
     private String email;
 
     /**
@@ -107,6 +113,8 @@ public class UserDTO extends PageDTO implements IPageParam{
     @Tolerate
     public UserDTO() {
     }
+
+    interface Insert{}
 
     @JsonIgnore
     public boolean isAdmin() {

@@ -2,7 +2,6 @@ package com.bowensun.film.service.impl;
 
 import cn.hutool.core.collection.CollectionUtil;
 import com.baiwang.customize.generator.util.WrapperUtils;
-import com.baiwang.customize.generator.util.DateUtils;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baiwang.customize.generator.util.PageUtils;
@@ -19,9 +18,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import javax.swing.text.html.Option;
 import java.util.*;
-import java.util.concurrent.TimeUnit;
 
 /**
  * 用户Service业务层处理
@@ -69,14 +66,12 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserEntity> impleme
     @Override
     public int insert(UserDTO dto) {
         UserEntity entity = converter.from(dto);
-        entity.setCreateTime(DateUtils.getNowDate());
         return mapper.insert(entity);
     }
 
     @Override
     public int update(UserDTO dto) {
         UserEntity entity = converter.from(dto);
-        entity.setUpdateTime(DateUtils.getNowDate());
         return mapper.updateById(entity);
     }
 

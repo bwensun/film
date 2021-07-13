@@ -36,7 +36,7 @@ public class UserDetailServiceImpl implements UserDetailsService {
         UserDTO user = userService.getUserDtoByUsername(username);
         if (Objects.isNull(user)) {
             log.info("登录用户：{}，不存在", username);
-            throw BizException.of(ExceptionEnum.USER_NOT_EXIST);
+            throw BizException.of(ExceptionEnum.USER_PASSWORD_NOT_MATCH);
         } else if (user.getStatus() == BizConstant.UserStatus.FROZEN) {
             log.info("登录用户：{}，已冻结", username);
             throw BizException.of(ExceptionEnum.USER_FROZEN);

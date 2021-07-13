@@ -1,9 +1,9 @@
 package com.bowensun.film.domain.entity;
 
-import com.baiwang.customize.generator.entity.BaseEntity;
+import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.bowensun.film.domain.base.BaseEntity;
 import lombok.*;
 
 /**
@@ -17,7 +17,7 @@ import lombok.*;
 @Getter
 @Setter
 @TableName("user")
-public class UserEntity extends BaseEntity<Long> {
+public class UserEntity extends BaseEntity {
 
 
     /**
@@ -43,6 +43,7 @@ public class UserEntity extends BaseEntity<Long> {
     /**
      * 性别
      */
+    @TableField(fill = FieldFill.INSERT)
     private Integer sex;
 
     /**
@@ -53,12 +54,14 @@ public class UserEntity extends BaseEntity<Long> {
     /**
      * 等级
      */
+    @TableField(fill = FieldFill.INSERT)
     private Integer level;
 
     /**
      * 活跃度
      */
-    private Long activity;
+    @TableField(fill = FieldFill.INSERT)
+    private double activity;
 
     /**
      * 电话号码
@@ -68,6 +71,7 @@ public class UserEntity extends BaseEntity<Long> {
     /**
      * 用户状态
      */
+    @TableField(fill = FieldFill.INSERT)
     private Integer status;
 
     /**

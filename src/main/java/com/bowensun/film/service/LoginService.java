@@ -1,5 +1,7 @@
 package com.bowensun.film.service;
 
+import com.bowensun.film.domain.dto.UserDTO;
+
 /**
  * 登录服务
  *
@@ -17,4 +19,11 @@ public interface LoginService {
      * @return token
      */
     String login(String username, String password);
+
+    /**
+     * 用户注册
+     *
+     * @param user 用户信息
+     */
+    void register(UserDTO user);
 }

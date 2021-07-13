@@ -1,7 +1,6 @@
 package com.bowensun.film.service.impl;
 
 import com.baiwang.customize.generator.util.WrapperUtils;
-import com.baiwang.customize.generator.util.DateUtils;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baiwang.customize.generator.util.PageUtils;
@@ -60,14 +59,12 @@ public class RoleServiceImpl implements RoleService {
     @Override
     public int insert(RoleDTO dto) {
         RoleEntity entity = converter.from(dto);
-        entity.setCreateTime(DateUtils.getNowDate());
         return mapper.insert(entity);
     }
 
     @Override
     public int update(RoleDTO dto) {
         RoleEntity entity = converter.from(dto);
-        entity.setUpdateTime(DateUtils.getNowDate());
         return mapper.updateById(entity);
     }
 
