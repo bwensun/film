@@ -6,11 +6,16 @@ import com.bowensun.film.common.annotation.LogT;
 import com.bowensun.film.common.config.redis.RedisCache;
 import com.bowensun.film.common.constant.BizConstant.*;
 import com.bowensun.film.domain.base.Result;
+import com.bowensun.film.domain.dto.CaptchaGenDTO;
 import com.bowensun.film.domain.dto.CaptchaImageDTO;
+import com.bowensun.film.domain.dto.CaptchaValidateDTO;
+import com.bowensun.film.service.CaptchaService;
 import com.google.code.kaptcha.Producer;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.util.FastByteArrayOutputStream;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
@@ -42,10 +47,13 @@ public class CaptchaController {
     @Value("${custom.captcha.type:math}")
     private String captchaType;
 
+    @Resource
+    private CaptchaService captchaService;
+
     /**
      * 生成验证码
      */
-    @LogT(functionName = "获取验证码")
+    @LogT(functionName = "获取图片验证码")
     @GetMapping("captchaImage")
     public Result<?> getCode() {
         // 保存验证码信息
@@ -81,5 +89,17 @@ public class CaptchaController {
         return Result.success(imageDTO);
     }
 
+    @LogT(functionName = "获取验证码")
+    @PostMapping("captcha/gen")
+    public Result<?> captchaGen(@RequestBody CaptchaGenDTO captcha){
+        captchaService.captchaGen(captcha);
+        return Result.success();
+    }
 
+    @LogT(functionName = "验证验证码")
+    @PostMapping("captcha/validate")
+    public Result<?> captchaValidate(@RequestBody CaptchaValidateDTO captcha){
+        boolean result = captchaService.captchaValidate(captcha);
+        return Result.success(result);
+    }
 }

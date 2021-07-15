@@ -5,6 +5,8 @@ import com.baiwang.customize.generator.dto.PageDTO;
 import java.util.Date;
 import java.util.List;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import lombok.experimental.Tolerate;
@@ -29,6 +31,7 @@ public class UserDTO extends PageDTO implements IPageParam{
     /**
      * 主键
      */
+    @TableId(value = "id", type = IdType.AUTO)
     private Long id;
 
     /**
