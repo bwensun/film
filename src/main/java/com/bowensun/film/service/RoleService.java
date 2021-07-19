@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.bowensun.film.domain.dto.RoleDTO;
 import com.bowensun.film.domain.vo.RoleVO;
 
+import javax.validation.constraints.NotEmpty;
 import java.util.List;
 
 /**
@@ -70,4 +71,12 @@ public interface RoleService {
      * @return 结果
      */
     int deleteById(Long id);
+
+    /**
+     * 给用户设置角色
+     *
+     * @param userId 用户主键
+     * @param roleName 角色名
+     */
+    void setUserRole(Long userId, @NotEmpty String roleName);
 }

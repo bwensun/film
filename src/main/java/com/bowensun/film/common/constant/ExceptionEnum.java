@@ -33,6 +33,11 @@ public enum ExceptionEnum {
      * 用户名或密码错误
      */
     USER_PASSWORD_NOT_MATCH("1004", "用户名或密码错误"),
+
+    /**
+     * 验证码错误
+     */
+    CAPTCHA_ERROR("1005", "验证码错误"),
     ;
 
     public final String code;

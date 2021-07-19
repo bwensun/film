@@ -24,8 +24,8 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
-import static com.bowensun.film.common.constant.BizConstant.CAPTCHA_CODE_KEY;
 import static com.bowensun.film.common.constant.BizConstant.CAPTCHA_EXPIRATION;
+import static com.bowensun.film.common.constant.BizConstant.CAPTCHA_REGISTER_KEY;
 
 /**
  * 验证码操作处理
@@ -58,7 +58,7 @@ public class CaptchaController {
     public Result<?> getCode() {
         // 保存验证码信息
         String uuid = IdUtil.simpleUUID();
-        String verifyKey = CAPTCHA_CODE_KEY + uuid;
+        String verifyKey = CAPTCHA_REGISTER_KEY + uuid;
 
         String capStr, code;
         BufferedImage image;

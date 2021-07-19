@@ -4,16 +4,24 @@ import com.baiwang.customize.generator.util.WrapperUtils;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baiwang.customize.generator.util.PageUtils;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.bowensun.film.common.constant.ExceptionEnum;
+import com.bowensun.film.common.exception.BizException;
 import com.bowensun.film.domain.dto.RoleDTO;
 import com.bowensun.film.domain.entity.RoleEntity;
+import com.bowensun.film.domain.entity.SysDictEntity;
+import com.bowensun.film.domain.entity.UserRoleEntity;
 import com.bowensun.film.domain.vo.RoleVO;
 import com.bowensun.film.repository.RoleMapper;
+import com.bowensun.film.repository.SysDictMapper;
+import com.bowensun.film.repository.UserRoleMapper;
 import com.bowensun.film.service.RoleService;
 import com.bowensun.film.service.mapstruct.RoleConverter;
 import org.springframework.stereotype.Service;
 
 
 import javax.annotation.Resource;
+import javax.validation.constraints.NotEmpty;
 import java.util.Arrays;
 import java.util.List;
 
@@ -24,13 +32,16 @@ import java.util.List;
  * @date 2021-04-16
  */
 @Service
-public class RoleServiceImpl implements RoleService {
+public class RoleServiceImpl extends ServiceImpl<RoleMapper, RoleEntity> implements RoleService {
 
     @Resource
     private RoleMapper mapper;
 
     @Resource
     private RoleConverter converter;
+
+    @Resource
+    private UserRoleMapper userRoleMapper;
 
     /**
      * 查询角色
@@ -76,6 +87,26 @@ public class RoleServiceImpl implements RoleService {
     @Override
     public int deleteById(Long id) {
         return mapper.deleteById(id);
+    }
+
+    /**
+     * 授予基础角色
+     *
+     * @param userId 用户主键
+     */
+    @Override
+    public void setUserRole(Long userId, @NotEmpty String roleName){
+        Long roleId = this.lambdaQuery()
+                .eq(RoleEntity::getRoleName, roleName)
+                .list()
+                .stream()
+                .findFirst()
+                .orElseThrow(() -> BizException.of(ExceptionEnum.INTERNAL_ERROR.code, "未初始化权限"))
+                .getId();
+        UserRoleEntity userRoleEntity = new UserRoleEntity()
+                .setUserId(userId)
+                .setRoleId(roleId);
+        userRoleMapper.insert(userRoleEntity);
     }
 
     /**

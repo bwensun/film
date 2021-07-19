@@ -22,6 +22,11 @@ public class CaptchaGenDTO {
     private Long userId;
 
     /**
+     * 用户名
+     */
+    private String username;
+
+    /**
      * 目标邮箱
      */
     private String to;

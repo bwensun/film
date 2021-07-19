@@ -4,9 +4,11 @@ import java.util.List;
 
 
 import com.bowensun.film.domain.dto.UserDTO;
+import com.bowensun.film.domain.dto.UserRegisterDTO;
 import com.bowensun.film.domain.entity.UserEntity;
 import com.bowensun.film.domain.vo.UserVO;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 import org.springframework.stereotype.Component;
 
 /**
@@ -25,6 +27,7 @@ public interface UserConverter {
     * @param user 数据传输对象
     * @return 返回持久化对象
     */
+    @Mapping(target = "remark", ignore = true)
     UserEntity from(UserDTO user);
 
     /**
@@ -42,6 +45,7 @@ public interface UserConverter {
     * @param user 持久化对象
     * @return 返回视图对象
     */
+    @Mapping(target = "index", ignore = true)
     UserVO to(UserEntity user);
 
     /**
@@ -52,4 +56,19 @@ public interface UserConverter {
     */
     List<UserVO> toList(List<UserEntity> userList);
 
+    /**
+     * 注册DTO 转 PO
+     *
+     * @param user 注册DTO
+     * @return PO
+     */
+    @Mapping(target = "status", ignore = true)
+    @Mapping(target = "sex", ignore = true)
+    @Mapping(target = "remark", ignore = true)
+    @Mapping(target = "phoneNumber", ignore = true)
+    @Mapping(target = "level", ignore = true)
+    @Mapping(target = "id", ignore = true)
+    @Mapping(target = "avatar", ignore = true)
+    @Mapping(target = "activity", ignore = true)
+    UserEntity dto2Po(UserRegisterDTO user);
 }

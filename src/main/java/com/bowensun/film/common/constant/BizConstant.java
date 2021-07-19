@@ -31,9 +31,14 @@ public final class BizConstant {
     public static final String LOGIN_TOKEN_KEY = "login_user:";
 
     /**
-     * Redis验证码前缀
+     * Redis注册验证码前缀
      */
-    public static final String CAPTCHA_CODE_KEY = "captcha:";
+    public static final String CAPTCHA_REGISTER_KEY = "captcha_register:";
+
+    /**
+     * Redis登录验证码前缀
+     */
+    public static final String CAPTCHA_LOGIN_KEY = "captcha_login:";
 
     /**
      * 用户活跃度

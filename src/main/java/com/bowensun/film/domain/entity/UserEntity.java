@@ -1,8 +1,6 @@
 package com.bowensun.film.domain.entity;
 
-import com.baomidou.mybatisplus.annotation.FieldFill;
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.annotation.*;
 import com.bowensun.film.domain.base.BaseEntity;
 import lombok.*;
 
@@ -23,6 +21,7 @@ public class UserEntity extends BaseEntity {
     /**
      * 主键
      */
+    @TableId(value = "id", type = IdType.AUTO)
     private Long id;
 
     /**

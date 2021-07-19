@@ -4,6 +4,7 @@ import com.bowensun.film.common.annotation.LogT;
 import com.bowensun.film.domain.base.Result;
 import com.bowensun.film.domain.dto.LoginDTO;
 import com.bowensun.film.domain.dto.UserDTO;
+import com.bowensun.film.domain.dto.UserRegisterDTO;
 import com.bowensun.film.service.LoginService;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -39,7 +40,7 @@ public class LoginController {
 
     @LogT(functionName = "用户注册")
     @RequestMapping("register")
-    public Result<?> register(@RequestBody @Validated UserDTO user) {
+    public Result<?> register(@RequestBody @Validated({UserRegisterDTO.Register.class}) UserRegisterDTO user) {
         loginService.register(user);
         return Result.success();
     }

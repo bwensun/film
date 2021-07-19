@@ -1,6 +1,6 @@
 package com.bowensun.film.service;
 
-import com.bowensun.film.domain.dto.UserDTO;
+import com.bowensun.film.domain.dto.UserRegisterDTO;
 
 /**
  * 登录服务
@@ -25,5 +25,5 @@ public interface LoginService {
      *
      * @param user 用户信息
      */
-    void register(UserDTO user);
+    void register(UserRegisterDTO user);
 }

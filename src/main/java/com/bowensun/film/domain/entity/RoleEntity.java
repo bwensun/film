@@ -1,5 +1,6 @@
 package com.bowensun.film.domain.entity;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.bowensun.film.domain.base.BaseEntity;
 import lombok.*;
@@ -30,5 +31,6 @@ public class RoleEntity extends BaseEntity {
     /**
      * 描述
      */
+    @TableField(value = "`desc`")
     private String desc;
 }

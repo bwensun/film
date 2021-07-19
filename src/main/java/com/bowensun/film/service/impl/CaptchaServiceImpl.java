@@ -32,13 +32,13 @@ public class CaptchaServiceImpl implements CaptchaService {
     @Override
     public void captchaGen(CaptchaGenDTO captchaGenDto) {
         String captcha = RandomUtil.randomNumbers(6);
-        //验证码存入redis
-        String key = BizConstant.CAPTCHA_CODE_KEY.concat(captchaGenDto.getUserId().toString());
-        redisCache.setCacheObject(key, captcha, 5, TimeUnit.MINUTES);
-        //发送邮件 todo: 后面需要调整为异步发送
         CaptchaType captchaType = CaptchaType.valueOf(captchaGenDto.getCaptchaType());
         switch (captchaType){
             case register:
+                //验证码存入redis
+                String key = BizConstant.CAPTCHA_REGISTER_KEY.concat(captchaGenDto.getUsername());
+                redisCache.setCacheObject(key, captcha, 5, TimeUnit.MINUTES);
+                //发送邮件 todo: 后面需要调整为异步发送
                 emailService.sendRegisterCaptcha(captchaGenDto.getTo(), captcha);
                 break;
             case login:
@@ -50,7 +50,19 @@ public class CaptchaServiceImpl implements CaptchaService {
 
     @Override
     public boolean captchaValidate(CaptchaValidateDTO captchaDto) {
-        String key = BizConstant.CAPTCHA_CODE_KEY.concat(captchaDto.getUserId().toString());
+        CaptchaType captchaType = CaptchaType.valueOf(captchaDto.getCaptchaType());
+        String key;
+        switch (captchaType){
+            case register:
+                key = BizConstant.CAPTCHA_REGISTER_KEY.concat(captchaDto.getUsername());
+                break;
+            case login:
+                key = BizConstant.CAPTCHA_LOGIN_KEY.concat(captchaDto.getUsername());
+                break;
+            default:
+                throw BizException.of(ExceptionEnum.INTERNAL_ERROR.code, "验证码类型异常！");
+        }
+
         String captcha = redisCache.getCacheObject(key);
         return captchaDto.getExpectedCaptcha().equals(captcha);
     }

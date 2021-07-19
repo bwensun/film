@@ -22,6 +22,16 @@ public class CaptchaValidateDTO {
     private Long userId;
 
     /**
+     * 用户名
+     */
+    private String username;
+
+    /**
+     * 验证码类型
+     */
+    private String captchaType;
+
+    /**
      * 预期的验证码
      */
     private String expectedCaptcha;
