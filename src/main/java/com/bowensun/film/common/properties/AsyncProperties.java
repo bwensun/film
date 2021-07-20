@@ -3,7 +3,7 @@ package com.bowensun.film.common.properties;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.stereotype.Component;
+
 
 /**
  * 异步配置
@@ -14,7 +14,6 @@ import org.springframework.stereotype.Component;
 @Getter
 @Setter
 @ConfigurationProperties(prefix = "film.async")
-@Component
 public class AsyncProperties {
 
     /**

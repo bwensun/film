@@ -50,6 +50,8 @@ mybatis-plus:
 ############ 自定义配置 ##########
 
 film:
+  config:
+    isAddressEnabled: true
   captcha:
     type: 'math'
   jwt:

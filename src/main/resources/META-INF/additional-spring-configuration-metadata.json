@@ -44,6 +44,11 @@
       "name": "film.async.threadNamePrefix",
       "type": "java.lang.String",
       "description": "线程名称前缀."
+    },
+    {
+      "name": "film.config.isAddressEnabled",
+      "type": "java.lang.String",
+      "description": "是否开启地理位置获取."
     }
   ]
 }
