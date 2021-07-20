@@ -3,12 +3,13 @@ package com.bowensun.film.service.impl;
 import cn.hutool.core.util.RandomUtil;
 import com.bowensun.film.common.config.redis.RedisCache;
 import com.bowensun.film.common.constant.BizConstant;
-import com.bowensun.film.common.constant.CaptchaType;
+import com.bowensun.film.common.constant.CaptchaTypeEnum;
 import com.bowensun.film.common.constant.ExceptionEnum;
 import com.bowensun.film.common.exception.BizException;
 import com.bowensun.film.domain.dto.CaptchaGenDTO;
 import com.bowensun.film.domain.dto.CaptchaValidateDTO;
 import com.bowensun.film.service.CaptchaService;
+import com.bowensun.film.service.component.AsyncService;
 import com.bowensun.film.service.component.EmailService;
 import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
@@ -24,7 +25,7 @@ import java.util.concurrent.TimeUnit;
 public class CaptchaServiceImpl implements CaptchaService {
 
     @Resource
-    private EmailService emailService;
+    private AsyncService asyncService;
 
     @Resource
     private RedisCache redisCache;
@@ -32,14 +33,14 @@ public class CaptchaServiceImpl implements CaptchaService {
     @Override
     public void captchaGen(CaptchaGenDTO captchaGenDto) {
         String captcha = RandomUtil.randomNumbers(6);
-        CaptchaType captchaType = CaptchaType.valueOf(captchaGenDto.getCaptchaType());
-        switch (captchaType){
+        CaptchaTypeEnum captchaTypeEnum = CaptchaTypeEnum.valueOf(captchaGenDto.getCaptchaType());
+        switch (captchaTypeEnum){
             case register:
                 //验证码存入redis
                 String key = BizConstant.CAPTCHA_REGISTER_KEY.concat(captchaGenDto.getUsername());
                 redisCache.setCacheObject(key, captcha, 5, TimeUnit.MINUTES);
-                //发送邮件 todo: 后面需要调整为异步发送
-                emailService.sendRegisterCaptcha(captchaGenDto.getTo(), captcha);
+                //异步发送邮件
+                asyncService.sendEmail(captchaGenDto.getTo(), captcha);
                 break;
             case login:
                 break;
@@ -50,9 +51,9 @@ public class CaptchaServiceImpl implements CaptchaService {
 
     @Override
     public boolean captchaValidate(CaptchaValidateDTO captchaDto) {
-        CaptchaType captchaType = CaptchaType.valueOf(captchaDto.getCaptchaType());
+        CaptchaTypeEnum captchaTypeEnum = CaptchaTypeEnum.valueOf(captchaDto.getCaptchaType());
         String key;
-        switch (captchaType){
+        switch (captchaTypeEnum){
             case register:
                 key = BizConstant.CAPTCHA_REGISTER_KEY.concat(captchaDto.getUsername());
                 break;

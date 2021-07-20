@@ -1,6 +1,7 @@
 package com.bowensun.film.service.impl;
 
-import com.bowensun.film.common.constant.CaptchaType;
+import com.bowensun.film.common.constant.BizConstant;
+import com.bowensun.film.common.constant.CaptchaTypeEnum;
 import com.bowensun.film.common.constant.ExceptionEnum;
 import com.bowensun.film.common.constant.RoleEnum;
 import com.bowensun.film.common.exception.BizException;
@@ -12,6 +13,7 @@ import com.bowensun.film.service.CaptchaService;
 import com.bowensun.film.service.LoginService;
 import com.bowensun.film.service.RoleService;
 import com.bowensun.film.service.UserService;
+import com.bowensun.film.service.component.AsyncService;
 import com.bowensun.film.service.component.TokenService;
 import com.bowensun.film.service.mapstruct.UserConverter;
 import lombok.extern.slf4j.Slf4j;
@@ -53,6 +55,9 @@ public class LoginServiceImpl implements LoginService {
     @Resource
     private UserConverter userConverter;
 
+    @Resource
+    private AsyncService asyncService;
+
     @Override
     public String login(String username, String password) {
         Authentication authentication;
@@ -61,7 +66,8 @@ public class LoginServiceImpl implements LoginService {
         } catch (Exception e) {
             if (e instanceof InternalAuthenticationServiceException) {
                 log.info("用户：{} 认证失败", username);
-                //TODO 异步处理 记录日志
+                //异步记录日志
+                asyncService.recordLoginInfo(username, BizConstant.LoginStatus.ONLINE, "登录成功");
             }
             throw e;
         }
@@ -75,7 +81,7 @@ public class LoginServiceImpl implements LoginService {
         //验证验证码
         CaptchaValidateDTO captchaValidate = new CaptchaValidateDTO()
                 .setUsername(user.getUsername())
-                .setCaptchaType(CaptchaType.register.name())
+                .setCaptchaType(CaptchaTypeEnum.register.name())
                 .setExpectedCaptcha(user.getCaptcha());
         boolean result = captchaService.captchaValidate(captchaValidate);
         if (result) {

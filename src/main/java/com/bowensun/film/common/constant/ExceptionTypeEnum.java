@@ -9,7 +9,7 @@ import lombok.AllArgsConstructor;
  * @date 2021/3/12
  */
 @AllArgsConstructor
-public enum ExceptionType {
+public enum ExceptionTypeEnum {
     /**
      * 业务异常
      */

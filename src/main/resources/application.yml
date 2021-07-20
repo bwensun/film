@@ -63,3 +63,9 @@ film:
       audience: 'fans'
       secret: 'tingzheng'
       refreshInterval: 20
+  async:
+    corePoolSize: 5
+    maxPoolSize: 20
+    queueCapacity: 100
+    keepAliveSecond: 300
+    threadNamePrefix: async-

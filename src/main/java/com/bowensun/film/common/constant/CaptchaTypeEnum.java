@@ -9,7 +9,7 @@ import lombok.AllArgsConstructor;
  * @date 2021/3/12
  */
 @AllArgsConstructor
-public enum CaptchaType {
+public enum CaptchaTypeEnum {
 
     /**
      * 注册

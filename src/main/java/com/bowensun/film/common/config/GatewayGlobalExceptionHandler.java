@@ -2,20 +2,19 @@ package com.bowensun.film.common.config;
 
 import cn.hutool.http.HttpStatus;
 import com.bowensun.film.common.constant.ExceptionEnum;
-import com.bowensun.film.common.constant.ExceptionType;
+import com.bowensun.film.common.constant.ExceptionTypeEnum;
 import com.bowensun.film.common.exception.BizException;
 import com.bowensun.film.domain.base.Result;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.annotation.Order;
 import org.springframework.security.authentication.AuthenticationServiceException;
-import org.springframework.security.authentication.InternalAuthenticationServiceException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 
-import static com.bowensun.film.common.constant.ExceptionType.AUTH_EXCEPTION;
+import static com.bowensun.film.common.constant.ExceptionTypeEnum.AUTH_EXCEPTION;
 
 /**
  * 全局异常处理
@@ -32,7 +31,7 @@ public class GatewayGlobalExceptionHandler {
     @ExceptionHandler(BizException.class)
     @ResponseBody
     public Result<?> businessException(HttpServletRequest request, BizException e) {
-        handlerException(ExceptionType.BIZ_EXCEPTION.desc, request, e);
+        handlerException(ExceptionTypeEnum.BIZ_EXCEPTION.desc, request, e);
         return Result.error(e.code, e.message);
     }
 
@@ -46,7 +45,7 @@ public class GatewayGlobalExceptionHandler {
     @ExceptionHandler(Exception.class)
     @ResponseBody
     public Result<?> otherException(HttpServletRequest request, Exception e) {
-        handlerException(ExceptionType.OTHER_EXCEPTION.desc, request, e);
+        handlerException(ExceptionTypeEnum.OTHER_EXCEPTION.desc, request, e);
         return Result.error("内部服务器错误", String.valueOf(HttpStatus.HTTP_INTERNAL_ERROR));
     }
 

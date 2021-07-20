@@ -19,6 +19,31 @@
       "name": "film.jwt.token.refreshInterval",
       "type": "java.lang.String",
       "description": "jwt.token刷新间隔."
+    },
+    {
+      "name": "film.async.corePoolSize",
+      "type": "java.lang.String",
+      "description": "核心线程数."
+    },
+    {
+      "name": "film.async.maxPoolSize",
+      "type": "java.lang.String",
+      "description": "最大线程数."
+    },
+    {
+      "name": "film.async.queueCapacity",
+      "type": "java.lang.String",
+      "description": "队列大小."
+    },
+    {
+      "name": "film.async.keepAliveSecond",
+      "type": "java.lang.String",
+      "description": "线程最大空闲时间."
+    },
+    {
+      "name": "film.async.threadNamePrefix",
+      "type": "java.lang.String",
+      "description": "线程名称前缀."
     }
   ]
 }

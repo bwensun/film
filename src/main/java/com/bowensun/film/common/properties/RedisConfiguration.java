@@ -15,7 +15,7 @@ import org.springframework.context.annotation.Configuration;
 @EnableConfigurationProperties({RedisProperties.class})
 public class RedisConfiguration {
 
-    private RedisProperties properties;
+    private final RedisProperties properties;
 
     public RedisConfiguration(RedisProperties properties) {
         this.properties = properties;
