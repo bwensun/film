@@ -1,19 +1,12 @@
 package com.bowensun.film.web;
 
-import com.alibaba.excel.EasyExcel;
-import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.bowensun.film.common.annotation.LogT;
-import com.bowensun.film.common.excel.handler.DefaultWriteHandler;
-import com.bowensun.film.common.util.ExcelUtil;
 import com.bowensun.film.domain.base.Result;
-import com.bowensun.film.domain.dto.UserDTO;
 import com.bowensun.film.domain.vo.UserVO;
 import com.bowensun.film.service.UserService;
-import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletResponse;
 import java.util.*;
 
 
@@ -31,35 +24,16 @@ public class UserController {
     @Resource
     private UserService userService;
 
-    @LogT(functionName = "测试： 用户分页查询")
-    @GetMapping(value = "/page")
-    public IPage<UserVO> selectPage(@RequestBody UserDTO user) {
-        return userService.selectPaging(user);
-    }
-
-    @LogT(functionName = "测试： 用户List查询")
-    @GetMapping(value = "/list")
-    public List<UserVO> selectList(@RequestBody UserDTO user) {
-        return userService.selectList(user);
-    }
-
-    @LogT(functionName = "测试： export")
-    @PostMapping(value = "/export")
-    @SneakyThrows
-    public void export(@RequestBody UserDTO user, HttpServletResponse response){
-        List<UserVO> userVOList = userService.selectList(user);
-        ExcelUtil.prepareExport(response, "用户列表");
-        EasyExcel.write(response.getOutputStream(), UserVO.class)
-                .useDefaultStyle(false)
-                .sheet("用户列表")
-                .registerWriteHandler(new DefaultWriteHandler())
-                .doWrite(userVOList);
-    }
-
     @GetMapping("activity/rank")
     @LogT(functionName = "用户活跃度排行查询")
     public Result<List<UserVO>> activityRank(Integer count){
         List<UserVO> data = userService.activityRank(count);
+        return Result.success(data);
+    }
+
+    @GetMapping("userInfo")
+    public Result<UserVO> userInfo(String token){
+        UserVO data = userService.getUserInfo(token);
         return Result.success(data);
     }
 }

@@ -8,6 +8,7 @@ import com.baiwang.customize.generator.util.PageUtils;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.bowensun.film.common.config.redis.RedisCache;
 import com.bowensun.film.common.constant.BizConstant;
+import com.bowensun.film.common.util.JwtUtil;
 import com.bowensun.film.domain.dto.UserDTO;
 import com.bowensun.film.domain.entity.UserEntity;
 import com.bowensun.film.domain.vo.UserVO;
@@ -112,6 +113,12 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserEntity> impleme
             });
         }
         return userVOList;
+    }
+
+    @Override
+    public UserVO getUserInfo(String token) {
+        Long userId = JwtUtil.parseToken(token, BizConstant.LOGIN_USER_ID).asLong();
+        return this.selectById(userId);
     }
 
     /**

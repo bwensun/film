@@ -96,4 +96,12 @@ public interface UserService extends IService<UserEntity> {
      * @return 用户信息
      */
     List<UserVO> activityRank(Integer count);
+
+    /**
+     * 获取用户详情
+     *
+     * @param token token
+     * @return UserVO
+     */
+    UserVO getUserInfo(String token);
 }
