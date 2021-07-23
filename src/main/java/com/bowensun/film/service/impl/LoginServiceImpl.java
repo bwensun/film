@@ -77,7 +77,7 @@ public class LoginServiceImpl implements LoginService {
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public void register(UserRegisterDTO user) {
+    public String register(UserRegisterDTO user) {
         //验证验证码
         CaptchaValidateDTO captchaValidate = new CaptchaValidateDTO()
                 .setUsername(user.getUsername())
@@ -85,18 +85,20 @@ public class LoginServiceImpl implements LoginService {
                 .setExpectedCaptcha(user.getCaptcha());
         boolean result = captchaService.captchaValidate(captchaValidate);
         if (result) {
-            reEncrypt(user);
             UserEntity po = userConverter.dto2Po(user);
+            reEncrypt(po);
             userService.save(po);
             //授予基础角色
             roleService.setUserRole(po.getId(), RoleEnum.user.name());
+            //执行自动登录
+            return this.login(user.getUsername(), user.getPassword());
         } else {
             log.debug("【用户注册】验证码错误");
             throw BizException.of(ExceptionEnum.CAPTCHA_ERROR);
         }
     }
 
-    private void reEncrypt(UserRegisterDTO user) {
+    private void reEncrypt(UserEntity user) {
         String encode = new BCryptPasswordEncoder().encode(user.getPassword());
         user.setPassword(encode);
     }

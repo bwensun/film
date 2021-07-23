@@ -25,5 +25,5 @@ public interface LoginService {
      *
      * @param user 用户信息
      */
-    void register(UserRegisterDTO user);
+    String register(UserRegisterDTO user);
 }

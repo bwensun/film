@@ -41,7 +41,7 @@ public class LoginController {
     @LogT(functionName = "用户注册")
     @RequestMapping("register")
     public Result<?> register(@RequestBody @Validated({UserRegisterDTO.Register.class}) UserRegisterDTO user) {
-        loginService.register(user);
-        return Result.success();
+        String token = loginService.register(user);
+        return Result.success(token);
     }
 }
