@@ -27,13 +27,6 @@ public class UserVO extends ExcelIndex{
     @ExcelProperty(value = "用户名", index = 1)
     private String username;
 
-
-    /**
-     * 密码
-     */
-    @ExcelProperty(value = "密码", index = 2)
-    private String password;
-
     /**
      * 昵称
      */

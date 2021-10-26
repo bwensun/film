@@ -29,6 +29,8 @@ public class TestInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object Handler) throws Exception {
         //logger.info("=========处理器执行之前调用==========");
+        String url = request.getRequestURL().toString();
+        String servletPath = request.getServletPath();
         return true;
     }
 

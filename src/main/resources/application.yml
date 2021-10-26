@@ -29,7 +29,8 @@ spring:
 
 server:
   port: 9090
-
+  servlet:
+    context-path: '/film'
 
 redis:
   expireTime: 3600
@@ -45,7 +46,6 @@ mybatis-plus:
       # not_null: 更新为 null 时忽略更新
       # not_empty: 字符串不能被更新为 null 或 空，其他类型不能被更新为 null
       update-strategy: ignored
-
 
 ############ 自定义配置 ##########
 
