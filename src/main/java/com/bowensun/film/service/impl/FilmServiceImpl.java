@@ -29,6 +29,7 @@ public class FilmServiceImpl extends ServiceImpl<FilmMapper, FilmEntity> impleme
     public IPage<FilmVo> selectPage(FilmDTO film) {
         FilmEntity filmEntity = filmConverter.dto2Po(film);
         IPage<FilmEntity> page = PageUtils.getPage(film);
+
         IPage<FilmEntity> result = lambdaQuery().setEntity(filmEntity).page(page);
         return PageUtils.convert(result, filmConverter::po2Vo);
     }
