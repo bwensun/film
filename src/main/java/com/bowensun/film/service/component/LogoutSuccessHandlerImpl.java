@@ -38,6 +38,7 @@ public class LogoutSuccessHandlerImpl implements LogoutSuccessHandler {
             //异步插入登录日志
             asyncService.recordLoginInfo(loginUser.getUsername(), BizConstant.LoginStatus.OFFLINE, "退出成功");
         }
+        response.setHeader("Access-Control-Allow-Origin", "*");
         ServletUtils.renderString(response, JSON.toJSONString(Result.success("退出成功")));
     }
 }
