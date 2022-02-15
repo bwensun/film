@@ -9,7 +9,10 @@ import com.bowensun.film.domain.dto.CaptchaGenDTO;
 import com.bowensun.film.domain.dto.CaptchaImageDTO;
 import com.bowensun.film.domain.dto.CaptchaValidateDTO;
 import com.bowensun.film.service.CaptchaService;
+import com.github.xiaoymin.knife4j.annotations.ApiSupport;
 import com.google.code.kaptcha.Producer;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.util.FastByteArrayOutputStream;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,6 +35,8 @@ import static com.bowensun.film.common.constant.BizConstant.CAPTCHA_REGISTER_KEY
  * @author ruoyi
  */
 @RestController
+@Api(tags = "验证码接口")
+@ApiSupport(order = 4)
 public class CaptchaController {
 
     @Resource(name = "captchaProducer")
@@ -53,6 +58,7 @@ public class CaptchaController {
      * 生成验证码
      */
     @GetMapping("captchaImage")
+    @ApiOperation(value = "生成验证码")
     public Result<?> getCode() {
         // 保存验证码信息
         String uuid = IdUtil.simpleUUID();
@@ -88,12 +94,14 @@ public class CaptchaController {
     }
 
     @PostMapping("captcha/gen")
+    @ApiOperation(value = "生成指定验证码")
     public Result<?> captchaGen(@RequestBody CaptchaGenDTO captcha) {
         captchaService.captchaGen(captcha);
         return Result.success();
     }
 
     @PostMapping("captcha/validate")
+    @ApiOperation(value = "验证验证码")
     public Result<?> captchaValidate(@RequestBody CaptchaValidateDTO captcha) {
         boolean result = captchaService.captchaValidate(captcha);
         return Result.success(result);

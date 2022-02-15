@@ -1,0 +1,16 @@
+knife4j:
+  # 开启增强配置
+  enable: true
+  # 开启生产环境屏蔽
+  production: true
+  basic:
+    enable: true
+    # Basic认证用户名
+    username: bwensun
+    # Basic认证密码
+    password: 285413
+  setting:
+    enableSwaggerModels: false
+    enableDocumentManage: false
+    # 开启界面中对某接口的版本控制 后端变化后Ui界面会存在小蓝点
+    enableVersion: true
