@@ -11,6 +11,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.Data;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.select.Elements;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpEntity;
@@ -21,6 +25,8 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
 import javax.annotation.Resource;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -48,13 +54,13 @@ class FilmTaskTest {
     @SneakyThrows
     @Test
     void FilmSync(){
-        String url = "https://movie.douban.com/j/search_subjects?type=movie&tag=%E7%BB%8F%E5%85%B8&sort=recommend&page_limit=200&page_start=0";
+        String url = "https://movie.douban.com/j/search_subjects?type=movie&tag=%E7%BB%8F%E5%85%B8&sort=recommend&page_limit=50&page_start=0";
         Map<String, String> map = new HashMap<>();
         //设置请求参数
         map.put("type", "movie");
         map.put("tag", "%E7%BB%8F%E5%85%B8");
         map.put("sort", "recommend");
-        map.put("page_limit", "20");
+        map.put("page_limit", "5");
         //i为一个变量，从多少条数据开始查询
         map.put("page_start", "0");
 
@@ -76,17 +82,40 @@ class FilmTaskTest {
             final FilmEntity filmPo = new FilmEntity();
             filmPo.setFilmName(subject.getTitle());
             filmPo.setCover(subject.getCover());
+            final String detailUrl = subject.getUrl();
+
+            URL request = new URL(detailUrl);
+            HttpURLConnection connection = (HttpURLConnection) request.openConnection();
+            connection.setRequestMethod("GET");
+            connection.addRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36");
+            connection.setConnectTimeout(80000);
+            //设置从主机读取数据超时（单位：毫秒）
+            connection.setReadTimeout(80000);
+            Document parse = Jsoup.parse(connection.getInputStream(), "UTF-8", detailUrl);
+            String filmName = parse.getElementsByTag("span").get(4).text();
+
+            String info = parse.getElementById("info").text();
+            filmPo.setFilmType(StringUtils.substring(info, StringUtils.indexOf(info,"类型") + 3, StringUtils.indexOf(info,"制片国家")));
+            filmPo.setScreenLocation(StringUtils.substring(info,StringUtils.indexOf(info,"制片国家") + 8, StringUtils.indexOf(info,"语言")));
+            filmPo.setScreenDate(StringUtils.substring(info,StringUtils.indexOf(info,"上映日期") + 6, StringUtils.indexOf(info,"上映日期") + 16));
+            filmPo.setFilmName(filmName);
+            filmPo.setMainActor(StringUtils.substring(info,StringUtils.indexOf(info,"主演") + 3, StringUtils.indexOf(info,"类型")));
+            filmPo.setDirector(StringUtils.substring(info, StringUtils.indexOf(info,"导演") + 3, StringUtils.indexOf(info,"编剧")));
+            filmPo.setScreenwriter(StringUtils.substring(info, StringUtils.indexOf(info,"编剧") + 3, StringUtils.indexOf(info,"主演")));
+            filmPo.setIntroduction("");
+            System.out.println(filmPo);
             filmService.save(filmPo);
+            Thread.sleep(3000);
         }
     }
 
     @Data
-    class Film {
+    static class Film {
 
         private List<Subject> subjects;
 
         @Data
-        class Subject{
+        static class Subject{
 
             private String episodes_info;
 

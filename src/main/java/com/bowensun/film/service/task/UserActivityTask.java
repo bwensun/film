@@ -12,8 +12,6 @@ import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
 import java.util.Set;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 /**
  * 用户活跃度相关定时任务
@@ -57,4 +55,7 @@ public class UserActivityTask {
                 .eq(UserEntity::getId, typedTuple.getValue())
                 .update());
     }
+
+
+
 }

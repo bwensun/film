@@ -31,6 +31,21 @@ public class FilmVo {
     private String director;
 
     /**
+     * 编剧
+     */
+    private String screenwriter;
+
+    /**
+     * 影片类型
+     */
+    private String filmType;
+
+    /**
+     * 电影主演
+     */
+    private String mainActor;
+
+    /**
      * 上映地点
      */
     private String screenLocation;
