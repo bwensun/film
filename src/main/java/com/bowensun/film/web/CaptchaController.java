@@ -2,9 +2,8 @@ package com.bowensun.film.web;
 
 import cn.hutool.core.codec.Base64;
 import cn.hutool.core.util.IdUtil;
-import com.bowensun.film.common.annotation.LogT;
 import com.bowensun.film.common.config.redis.RedisCache;
-import com.bowensun.film.common.constant.BizConstant.*;
+import com.bowensun.film.common.constant.BizConstant.CaptchaType;
 import com.bowensun.film.domain.base.Result;
 import com.bowensun.film.domain.dto.CaptchaGenDTO;
 import com.bowensun.film.domain.dto.CaptchaImageDTO;
@@ -53,7 +52,6 @@ public class CaptchaController {
     /**
      * 生成验证码
      */
-    @LogT(functionName = "获取图片验证码")
     @GetMapping("captchaImage")
     public Result<?> getCode() {
         // 保存验证码信息
@@ -89,16 +87,14 @@ public class CaptchaController {
         return Result.success(imageDTO);
     }
 
-    @LogT(functionName = "获取验证码")
     @PostMapping("captcha/gen")
-    public Result<?> captchaGen(@RequestBody CaptchaGenDTO captcha){
+    public Result<?> captchaGen(@RequestBody CaptchaGenDTO captcha) {
         captchaService.captchaGen(captcha);
         return Result.success();
     }
 
-    @LogT(functionName = "验证验证码")
     @PostMapping("captcha/validate")
-    public Result<?> captchaValidate(@RequestBody CaptchaValidateDTO captcha){
+    public Result<?> captchaValidate(@RequestBody CaptchaValidateDTO captcha) {
         boolean result = captchaService.captchaValidate(captcha);
         return Result.success(result);
     }

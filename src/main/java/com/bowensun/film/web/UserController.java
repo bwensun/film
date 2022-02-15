@@ -1,6 +1,5 @@
 package com.bowensun.film.web;
 
-import com.bowensun.film.common.annotation.LogT;
 import com.bowensun.film.domain.base.Result;
 import com.bowensun.film.domain.vo.UserVO;
 import com.bowensun.film.service.UserService;
@@ -25,7 +24,6 @@ public class UserController {
     private UserService userService;
 
     @GetMapping("activity/rank")
-    @LogT(functionName = "用户活跃度排行查询")
     public Result<List<UserVO>> activityRank(Integer count){
         List<UserVO> data = userService.activityRank(count);
         return Result.success(data);
