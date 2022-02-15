@@ -33,4 +33,10 @@ public class FilmServiceImpl extends ServiceImpl<FilmMapper, FilmEntity> impleme
         IPage<FilmEntity> result = lambdaQuery().setEntity(filmEntity).page(page);
         return PageUtils.convert(result, filmConverter::po2Vo);
     }
+
+    @Override
+    public FilmVo detail(Long id) {
+        final FilmEntity po = this.getById(id);
+        return filmConverter.po2Vo(po);
+    }
 }

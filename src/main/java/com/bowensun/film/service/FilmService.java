@@ -21,4 +21,12 @@ public interface FilmService extends IService<FilmEntity> {
      * @return 分页对象
      */
     IPage<FilmVo> selectPage(FilmDTO film);
+
+    /**
+     * 电影详情
+     *
+     * @param id 主键
+     * @return 电影VO
+     */
+    FilmVo detail(Long id);
 }
