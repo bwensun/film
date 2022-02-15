@@ -1,7 +1,7 @@
 package com.bowensun.film.common.config;
 
-import com.bowensun.film.service.component.JwtAuthenticationTokenFilter;
 import com.bowensun.film.service.component.AuthenticationEntryPointImpl;
+import com.bowensun.film.service.component.JwtAuthenticationTokenFilter;
 import com.bowensun.film.service.component.LogoutSuccessHandlerImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -10,6 +10,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -66,8 +67,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/login", "/register", "/captchaImage", "/captcha/**", "/film/**", "/user/**", "/system/**").anonymous()
                 .antMatchers(HttpMethod.GET, "/*.html", "/**/*.html", "/**/*.css", "/**/*.js").permitAll()
-                .antMatchers("/swagger-ui.html").anonymous()
-                .antMatchers("/swagger-resources/**").anonymous()
                 .antMatchers("/druid/**").anonymous()
                 .antMatchers("/test/**").anonymous()
                 // 除上面外的所有请求全部需要鉴权认证
@@ -84,5 +83,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     public AuthenticationManager authenticationManagerBean() throws Exception {
         return super.authenticationManagerBean();
+    }
+
+    @Override
+    public void configure(WebSecurity web) throws Exception {
+        web.ignoring().antMatchers(
+                "/doc.html",
+                // swagger api json
+                "/v2/api-docs",
+                "/swagger-resources/**",
+                //补充路径，近期在搭建swagger接口文档时，通过浏览器控制台发现该/webjars路径下的文件被拦截，故加上此过滤条件即可。(2020-10-23)
+                "/webjars/**"
+        );
     }
 }

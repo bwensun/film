@@ -19,7 +19,7 @@ public class FilterConfig {
         registration.setFilter(new TestFilter());
         registration.addUrlPatterns("/*");
         registration.setName("测试过滤器");
-        registration.setOrder(1);
+        registration.setOrder(Integer.MAX_VALUE);
         return registration;
     }
 }

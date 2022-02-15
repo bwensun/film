@@ -3,6 +3,7 @@ package com.bowensun.film.common.config;
 import com.google.common.collect.Lists;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.annotation.Order;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
@@ -16,6 +17,7 @@ import org.springframework.web.filter.CorsFilter;
 public class GlobalCorsConfig {
 
     @Bean
+    @Order(Integer.MIN_VALUE)
     public CorsFilter corsFilter() {
 
         CorsConfiguration config = new CorsConfiguration();
