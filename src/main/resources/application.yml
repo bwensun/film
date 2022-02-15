@@ -79,3 +79,6 @@ custom:
     dog:
       age: 4
       name: "闪电"
+  qiniuyun:
+    accessKey: oBXaAHteDEd4zYJJWnzZpYvJW676jGXwUiI-YMF4
+    secretKey: Es19lONDobX1LEzckHxgB5XPmqYu1B4vW2meCXYV

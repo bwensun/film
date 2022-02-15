@@ -21,4 +21,7 @@ public class CustomProperties {
 
     @NestedConfigurationProperty
     private UserProperties user;
+
+    @NestedConfigurationProperty
+    private QnyProperties qiniuyun;
 }
