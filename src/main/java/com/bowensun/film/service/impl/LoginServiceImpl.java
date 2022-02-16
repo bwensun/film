@@ -58,6 +58,7 @@ public class LoginServiceImpl implements LoginService {
     @Resource
     private AsyncService asyncService;
 
+
     @Override
     public String login(String username, String password) {
         Authentication authentication;
@@ -88,6 +89,8 @@ public class LoginServiceImpl implements LoginService {
             UserEntity po = userConverter.dto2Po(user);
             reEncrypt(po);
             userService.save(po);
+            //异步执行生成头像并上传
+            asyncService.generateAvatarAndUpload(po);
             //授予基础角色
             roleService.setUserRole(po.getId(), RoleEnum.user.name());
             //执行自动登录
@@ -99,6 +102,7 @@ public class LoginServiceImpl implements LoginService {
     }
 
     private void reEncrypt(UserEntity user) {
+        //密码加密
         String encode = new BCryptPasswordEncoder().encode(user.getPassword());
         user.setPassword(encode);
     }

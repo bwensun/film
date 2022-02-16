@@ -3,9 +3,11 @@ package com.bowensun.film.service.task;
 
 import cn.hutool.http.HttpResponse;
 import cn.hutool.http.HttpUtil;
+import com.bowensun.film.domain.avatar.Generator;
 import com.bowensun.film.domain.entity.FilmEntity;
 import com.bowensun.film.repository.FilmMapper;
 import com.bowensun.film.service.FilmService;
+import com.bowensun.film.service.component.QnySdkComponent;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.Data;
@@ -25,6 +27,9 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
 import javax.annotation.Resource;
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.HashMap;
@@ -43,10 +48,34 @@ import java.util.Map;
 class FilmTaskTest {
 
     @Resource
-    private RestTemplate restTemplate;
+    private FilmService filmService;
 
     @Resource
-    private FilmService filmService;
+    private QnySdkComponent qnySdkComponent;
+
+    @Test
+    void test() throws IOException {
+        Generator generator = new Generator("bwensun");
+        final BufferedImage bufferedImage = generator.nextAvatar();
+        final ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        ImageIO.write(bufferedImage, "png", outputStream);
+        qnySdkComponent.upload("image-film", "avatar-test.png", outputStream.toByteArray());
+    }
+
+
+    @Test
+    void pictureSync(){
+        filmService.lambdaQuery()
+                .list()
+                .forEach(x -> {
+                    final String cover = x.getCover();
+                    final String replace = cover.replace("http://image.bowensun.top", "https://picture.bowensun.top");
+                    filmService.lambdaUpdate()
+                            .set(FilmEntity::getCover, replace)
+                            .eq(FilmEntity::getId, x.getId())
+                            .update();
+                });
+    }
 
     /**
      * 电影
