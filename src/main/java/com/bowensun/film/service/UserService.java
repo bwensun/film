@@ -90,14 +90,6 @@ public interface UserService extends IService<UserEntity> {
     void activityAdjust(Long userId, double delta);
 
     /**
-     * 用户活跃度排行
-     *
-     * @param count 前几名
-     * @return 用户信息
-     */
-    List<UserVO> activityRank(Integer count);
-
-    /**
      * 获取用户详情
      *
      * @param token token

@@ -1,6 +1,8 @@
 package com.bowensun.film.web;
 
+import cn.hutool.system.UserInfo;
 import com.bowensun.film.domain.base.Result;
+import com.bowensun.film.domain.dto.UserDTO;
 import com.bowensun.film.domain.vo.UserVO;
 import com.bowensun.film.service.UserService;
 import com.github.xiaoymin.knife4j.annotations.ApiSupport;
@@ -28,17 +30,17 @@ public class UserController {
     @Resource
     private UserService userService;
 
-    @GetMapping("activity/rank")
-    @ApiOperation(value = "获取用户活跃度排行")
-    public Result<List<UserVO>> activityRank(Integer count){
-        List<UserVO> data = userService.activityRank(count);
-        return Result.success(data);
-    }
-
     @GetMapping("userInfo")
     @ApiOperation(value = "获取用户详情")
     public Result<UserVO> userInfo(String token){
         UserVO data = userService.getUserInfo(token);
         return Result.success(data);
+    }
+
+    @ApiOperation(value = "用户信息更新")
+    @PostMapping("update")
+    public Result<?> update(@RequestBody UserDTO user){
+        userService.update(user);
+        return Result.success();
     }
 }

@@ -102,18 +102,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserEntity> impleme
         }
     }
 
-    @Override
-    public List<UserVO> activityRank(Integer count) {
-        Set<Integer> userIdSet = redisCache.revRange(BizConstant.ACTIVITY_RANK_KEY, 0, count - 1);
-        List<UserVO> userVOList = new ArrayList<>();
-        if (CollectionUtil.isNotEmpty(userIdSet)) {
-            userIdSet.forEach(id -> {
-                UserVO userVO = this.selectById(id.longValue());
-                userVOList.add(userVO);
-            });
-        }
-        return userVOList;
-    }
+
 
     @Override
     public UserVO getUserInfo(String token) {
