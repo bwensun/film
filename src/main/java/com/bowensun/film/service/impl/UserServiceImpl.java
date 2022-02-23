@@ -1,6 +1,5 @@
 package com.bowensun.film.service.impl;
 
-import cn.hutool.core.collection.CollectionUtil;
 import com.baiwang.customize.generator.util.WrapperUtils;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
@@ -105,9 +104,8 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserEntity> impleme
 
 
     @Override
-    public UserVO getUserInfo(String token) {
-        Long userId = JwtUtil.parseToken(token, BizConstant.LOGIN_USER_ID).asLong();
-        return this.selectById(userId);
+    public UserVO getUserInfo(Long id) {
+        return this.selectById(id);
     }
 
     /**

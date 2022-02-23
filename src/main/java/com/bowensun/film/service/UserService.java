@@ -92,8 +92,8 @@ public interface UserService extends IService<UserEntity> {
     /**
      * 获取用户详情
      *
-     * @param token token
      * @return UserVO
+     * @param id 用户主键
      */
-    UserVO getUserInfo(String token);
+    UserVO getUserInfo(Long id);
 }

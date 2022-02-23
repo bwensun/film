@@ -44,7 +44,7 @@ mybatis-plus:
       # ignored: 忽略非空判断，所有字段都可以被更新为 null
       # not_null: 89-=70更新为 null 时忽略更新
       # not_empty: 字符串不能被更新为 null 或 空，其他类型不能被更新为 null
-      update-strategy: ignored
+      update-strategy: not_null
 
 ############ 自定义配置 ##########
 

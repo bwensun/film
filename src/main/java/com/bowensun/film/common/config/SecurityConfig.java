@@ -66,7 +66,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
                 .authorizeRequests()
                 // 无需授权均可访问的接口:登录、注册、验证码获取、电影分页查询、排行、字典
-                .antMatchers("/login", "/register", "/captcha/**", "/film/page", "/user/userInfo", "/rank/activity", "/system/dict/all", "/system/dict/info", "/test/**").permitAll()
+                .antMatchers("/login", "/register", "/captcha/**", "/film/page", "/rank/activity", "/system/dict/all", "/system/dict/info", "/test/**").permitAll()
                 .antMatchers(HttpMethod.GET, "/*.html", "/**/*.html", "/**/*.css", "/**/*.js").permitAll()
                 .antMatchers("/druid/**").permitAll()
                 // 除上面外的所有请求全部需要鉴权认证
